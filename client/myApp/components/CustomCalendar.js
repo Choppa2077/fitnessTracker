@@ -18,7 +18,7 @@ import {useNavigation} from '@react-navigation/native';
 const CustomCalendar = () => {
   const currentDate = new Date();
   const dummyData = [];
-  const daysToShow = 30;
+  const daysToShow = 3;
 
   for (let i = -daysToShow; i <= daysToShow; i++) {
     const date = new Date();
@@ -43,14 +43,25 @@ const CustomCalendar = () => {
       isToday: i === 0,
     });
   }
-  const backgroundColor = "#1d1d1d"
-  const today = "#33429b"
+  const backgroundColor = '#1d1d1d';
+  const today = '#33429b';
+
+  // Move today's date to the beginning of the array
+  // const todayIndex = dummyData.findIndex(day => day.isToday);
+  // if (todayIndex !== -1) {
+  //   const todayData = dummyData.splice(todayIndex, 1);
+  //   dummyData.unshift(...todayData);
+  // }
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
       className="rounded-xl"
-      style={{marginTop: hp(2), padding: hp(2), backgroundColor:backgroundColor}}>
+      style={{
+        marginTop: hp(2),
+        padding: hp(2),
+        backgroundColor: backgroundColor,
+      }}>
       {dummyData.map((day, index) => (
         <View
           key={index}

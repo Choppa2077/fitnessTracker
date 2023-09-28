@@ -17,17 +17,30 @@ import {Carousel} from 'react-native-snap-carousel';
 import {useNavigation} from '@react-navigation/native';
 import MyWorkoutCard from './MyWorkoutCard';
 
-const MyWorkoutList = ({data}) => {
+
+const MyWorkoutList = ({data, onWorkoutNameChange}) => {
   const lengthOfGivenData = data.length;
   const navigation = useNavigation();
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  const handleClick = item => {
-    {
-      lengthOfGivenData === 0
-        ? navigation.navigate('CreateWorkout', item)
-        : navigation.navigate('Workout', item);
-    }
+  // Function to handle card click and open the modal
+  const openModal = item => {
+    setSelectedItem(item); // Set the selected item when a card is clicked
   };
+
+  // Function to navigate to the 'Workout' screen
+  const navigateToWorkout = item => {
+    lengthOfGivenData === 0
+      ? navigation.navigate('EditWorkout', item)
+      : navigation.navigate('Workout', item);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setSelectedItem(null); // Reset the selected item to close the modal
+  };
+
+
   // console.log(lengthOfGivenData);
   const itemsCenter = 'items-center';
   return (
@@ -41,10 +54,13 @@ const MyWorkoutList = ({data}) => {
             Create your own workout routines
           </Text>
           <MyWorkoutCard
+            item={data}
+            openModal={openModal}
             itemsCenter={itemsCenter}
+            navigateToWorkout={navigateToWorkout}
             lengthOfGivenData={lengthOfGivenData}
             insideText="Create a Workout routine"
-            handleClick={handleClick}
+            onWorkoutNameChange={onWorkoutNameChange}
           />
         </View>
       ) : (
@@ -59,19 +75,22 @@ const MyWorkoutList = ({data}) => {
             data={data}
             renderItem={({item}) => (
               <MyWorkoutCard
-                itemsCenter={''}
-                lengthOfGivenData={lengthOfGivenData}
-                insideText={'Custom Workout'}
                 item={item}
-                handleClick={handleClick}
+                openModal={openModal}
+                itemsCenter={' '}
+                navigateToWorkout={navigateToWorkout}
+                lengthOfGivenData={lengthOfGivenData}
+               // insideText="Abs"
+               onWorkoutNameChange={onWorkoutNameChange}
               />
+              
             )}
             firstItem={1}
             inactiveSlideOpacity={0.7}
             sliderWidth={wp(100)}
             itemWidth={wp(70)}
-            sliderStyle={{display: 'flex', alignItems: 'center'}}
-          />
+            sliderStyle={{display: 'flex', alignItems: 'center'}}></Carousel>
+         
         </View>
       )}
     </View>

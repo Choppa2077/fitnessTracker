@@ -20,9 +20,11 @@ import ReadyWorkoutCard from './ReadyWorkoutCard';
 const ReadyWorkoutList = ({data}) => {
   const navigation = useNavigation();
 
-  const handleClick = item => {
+  // Function to navigate to the 'Workout' screen
+  const navigateToWorkout = item => {
     navigation.navigate('Workout', item);
   };
+
   return (
     <View className="flex-1" style={{marginTop: hp(3)}}>
       <View>
@@ -33,22 +35,16 @@ const ReadyWorkoutList = ({data}) => {
           You can customize even ready workouts
         </Text>
       </View>
-
-      <Carousel
-        data={data}
-        renderItem={({item}) => (
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {data.map((item, index) => (
           <ReadyWorkoutCard
+            key={index}
             item={item}
-            handleClick={handleClick}
+            navigateToWorkout={navigateToWorkout}
             insideText={'Muscle hypertrophy'}
           />
-        )}
-        firstItem={1}
-        inactiveSlideOpacity={0.7}
-        sliderWidth={wp(100)}
-        itemWidth={wp(70)}
-        sliderStyle={{display: 'flex', alignItems: 'center'}}
-      />
+        ))}
+      </ScrollView>
     </View>
   );
 };

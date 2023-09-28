@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Modal,
+  TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
@@ -16,28 +17,42 @@ import {
 import * as Icons from 'react-native-heroicons/solid';
 import Carousel from 'react-native-snap-carousel';
 import {useNavigation} from '@react-navigation/native';
+import {theme} from '../colors/backgrounds';
 
 const MyWorkoutCard = ({
+  item,
   itemsCenter,
+  navigateToWorkout,
   lengthOfGivenData,
   insideText,
-  item,
-  handleClick,
+  onWorkoutNameChange, // Add this prop
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [workoutName, setWorkoutName] = useState('');
+  const [description, setDescription] = useState('');
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-    setTimeout(() => setModalVisible(false), 1500);
+  const showModal = () => {
+    setModalVisible(true);
   };
-  const primary = '#3b1960';
-  //#36a740
-  //"#3b1960"
-  //"#541f90"
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const saveWorkout = () => {
+    // Handle saving the workout here
+    onWorkoutNameChange(workoutName); // Call the callback with workoutName
+    closeModal();
+  };
+
   return (
-    <TouchableWithoutFeedback onPress={() => handleClick(item)}>
+    <TouchableWithoutFeedback onPress={() => navigateToWorkout(item)}>
       <View
-        style={{width: wp(70), height: hp(20), backgroundColor: primary}}
+        style={{
+          width: wp(70),
+          height: hp(20),
+          backgroundColor: theme.secondary,
+        }}
         className={
           'flex-row relative mt-4 rounded-l-md rounded-r-md px-2 justify-between ' +
           itemsCenter
@@ -49,7 +64,7 @@ const MyWorkoutCard = ({
               style={{
                 fontSize: hp(3),
               }}>
-              {insideText}
+              {lengthOfGivenData === 0 ? insideText : workoutName}
             </Text>
           </View>
         </View>
@@ -60,43 +75,100 @@ const MyWorkoutCard = ({
           />
         </View>
 
-        <TouchableOpacity onPress={toggleModal}>
+        <TouchableOpacity onPress={showModal}>
           {lengthOfGivenData === 0 ? (
             <Icons.ArrowRightIcon size={hp(4)} color={'white'} />
           ) : (
             <Icons.Bars3Icon size={hp(4)} color={'white'} />
           )}
         </TouchableOpacity>
-        {lengthOfGivenData === 0 ? (
-          <View />
-        ) : (
+        {lengthOfGivenData != 0 ? (
           <Modal
-            animationType="fade"
             transparent={true}
-            visible={isModalVisible}>
-            <TouchableOpacity>
+            visible={isModalVisible}
+            animationType="fade">
+            <View className="flex-1  items-center justify-center">
               <View
-                className="bg-white absolute rounded-md"
+                className="p-8 rounded-lg items-center "
                 style={{
-                  width: hp(13),
-                  height: hp(8),
-                  top: hp(34),
-                  right: hp(8),
-                  elevation: 5,
+                  backgroundColor: theme.background,
+                  width: hp(40),
+                  height: hp(50),
                 }}>
-                <TouchableOpacity>
-                  <Text className="text-black " style={{fontSize: hp(2.5)}}>
-                    Edit
+                <View>
+                  <Text
+                    className="font-extrabold"
+                    style={{
+                      fontSize: hp(3),
+                      marginBottom: hp(1),
+                      color: theme.secondary,
+                    }}>
+                    Create a workout routine
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity className="mt-2">
-                  <Text className="text-black " style={{fontSize: hp(2.5)}}>
-                    Delete
-                  </Text>
-                </TouchableOpacity>
+                  <View>
+                    <Text
+                      className="text-white"
+                      style={{fontSize: hp(2), marginBottom: hp(1)}}>
+                      Name
+                    </Text>
+                    <TextInput
+                      placeholder="Workout Name"
+                      value={workoutName}
+                      onChangeText={text => setWorkoutName(text)}
+                      className="rounded-full"
+                      style={{
+                        backgroundColor: 'white',
+                        width: hp(30),
+                        marginBottom: hp(3),
+                        fontSize: hp(2.5),
+                      }}
+                    />
+                  </View>
+
+                  <View>
+                    <Text
+                      className="text-white"
+                      style={{fontSize: hp(2), marginBottom: hp(1)}}>
+                      Details
+                    </Text>
+                    <TextInput
+                      placeholder="Description(Optional)"
+                      value={description}
+                      onChangeText={text => setDescription(text)}
+                      className=" rounded-3xl"
+                      style={{
+                        backgroundColor: 'white',
+                        width: hp(30),
+                        height: hp(10),
+                        marginBottom: hp(3),
+                        fontSize: hp(2.5),
+                      }}
+                    />
+                  </View>
+                </View>
+                <View
+                  style={{width: hp(40)}}
+                  className="flex-row justify-evenly">
+                  <TouchableOpacity onPress={closeModal}>
+                    <Text
+                      style={{color: theme.close, fontSize: hp(2.5)}}
+                      className="font-bold">
+                      Cancel
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={saveWorkout}>
+                    <Text
+                      style={{color: theme.secondary, fontSize: hp(2.5)}}
+                      className="font-bold">
+                      Save
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </TouchableOpacity>
+            </View>
           </Modal>
+        ) : (
+          <View />
         )}
       </View>
     </TouchableWithoutFeedback>

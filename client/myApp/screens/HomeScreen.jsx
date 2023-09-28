@@ -1,4 +1,10 @@
-import {View, Text, StatusBar, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
 import {
@@ -9,24 +15,32 @@ import * as Icons from 'react-native-heroicons/solid';
 import MyWorkoutList from '../components/MyWorkoutList';
 import ReadyWorkoutList from '../components/ReadyWorkoutList';
 import CustomCalendar from '../components/CustomCalendar';
-
+import {theme} from '../colors/backgrounds';
+import CreateWorkoutButton from '../components/CreateWorkoutButton';
+import {useNavigation} from '@react-navigation/native';
 
 const HomeScreen = () => {
-  const [myWorkoutList, setMyWorkoutList] = useState([1,2,3]);
-  const [readyWorkoutList, setReadyWorkoutList] = useState([1,2,3])
-  const backgroundColor = "#161616"
-  const primaryText = "#33429b"
-  //"#541f90"
+  const [myWorkoutList, setMyWorkoutList] = useState([1, 2, 3]);
+  const [readyWorkoutList, setReadyWorkoutList] = useState([1, 2, 3]);
+  const navigation = useNavigation();
+  const [workoutName, setWorkoutName] = useState(''); // State to store workoutName
+
+  const handleWorkoutNameChange = newWorkoutName => {
+    setWorkoutName(newWorkoutName); // Update workoutName state
+  };
+  console.log(workoutName);
   return (
-    <ScrollView className="flex-1 px-3 pt-4"
-    style={{backgroundColor:backgroundColor}}
-    >
+    <ScrollView
+      className="flex-1 px-3 pt-4"
+      style={{backgroundColor: theme.background}}>
       <StatusBar style="white" />
       <View className="flex-row justify-between">
         <View>
           <Text className="text-white" style={{fontSize: hp(4)}}>
             Hello,
-            <Text className="font-extrabold" style={{color:primaryText}}>Mukan</Text>
+            <Text className="font-extrabold" style={{color: theme.secondary}}>
+              Mukan
+            </Text>
           </Text>
           <Text className="text-gray-300" style={{fontSize: hp(1.6)}}>
             Get ready for today's workout!
@@ -39,9 +53,31 @@ const HomeScreen = () => {
         />
       </View>
 
-     <CustomCalendar/>
-      <MyWorkoutList data={myWorkoutList}/>
-      <ReadyWorkoutList data={readyWorkoutList}/>
+      <CustomCalendar />
+      <MyWorkoutList
+        // title="Ready Workouts"
+        // subtitle="You can customize even ready workouts"
+        // insideText={'Muscle hypertrophy'}
+        onWorkoutNameChange={handleWorkoutNameChange}
+        data={myWorkoutList}
+      />
+      {/* <MyWorkoutList
+        title="Ready Workouts"
+        subtitle="You can customize even ready workouts"
+        insideText={'Muscle hypertrophy'}
+        data={readyWorkoutList}
+      /> */}
+
+      <ReadyWorkoutList data={readyWorkoutList} />
+      {/* <CreateWorkoutButton/> */}
+      <View
+        className="flex-1 items-end justify-center"
+        style={{height: hp(10), marginTop: hp(2)}}>
+        <TouchableWithoutFeedback
+          onPress={() => navigation.navigate('EditWorkout')}>
+          <Icons.PlusCircleIcon size={hp(7)} color={theme.secondary} />
+        </TouchableWithoutFeedback>
+      </View>
     </ScrollView>
   );
 };
