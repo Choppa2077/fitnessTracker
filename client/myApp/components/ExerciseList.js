@@ -12,6 +12,7 @@ const ExerciseList = ({data, countOfSets}) => {
           countOfSets={countOfSets}
           lengthOfGivenData={lengthOfGivenData}
         />
+        
       ))}
     </View>
   );

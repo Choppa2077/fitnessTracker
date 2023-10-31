@@ -21,8 +21,8 @@ const ReadyWorkoutList = ({data}) => {
   const navigation = useNavigation();
 
   // Function to navigate to the 'Workout' screen
-  const navigateToWorkout = item => {
-    navigation.navigate('Workout', item);
+  const navigateToProgram = item => {
+    navigation.navigate('Program', item);
   };
 
   return (
@@ -40,8 +40,11 @@ const ReadyWorkoutList = ({data}) => {
           <ReadyWorkoutCard
             key={index}
             item={item}
-            navigateToWorkout={navigateToWorkout}
-            insideText={'Muscle hypertrophy'}
+            navigateToProgram={navigateToProgram}
+            title={"Abdomen"}
+            h={17}
+            icon={true}
+            w={70}
           />
         ))}
       </ScrollView>

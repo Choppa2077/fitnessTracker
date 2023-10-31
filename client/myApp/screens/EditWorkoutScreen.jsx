@@ -22,6 +22,7 @@ import ExerciseList from '../components/ExerciseList';
 import StartWorkout from '../components/StartWorkout';
 import AddButton from '../components/AddButton';
 import EditInputs from '../components/EditInputs';
+import GoBackButton from '../components/GoBackButton';
 
 const EditWorkoutScreen = () => {
   const navigation = useNavigation();
@@ -46,12 +47,7 @@ const EditWorkoutScreen = () => {
         <View
           className="flex-row items-center justify-items-start"
           style={{paddingHorizontal: hp(2)}}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={theme.secondary}
-            className="rounded-xl p-1">
-            <Icons.ChevronLeftIcon size={hp(3)} color={'white'} />
-          </TouchableOpacity>
+         <GoBackButton navigation={navigation}/>
           <View>
             <Text className="text-white" style={{fontSize: hp(3)}}>
               Edit Workout
