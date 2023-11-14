@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'fitnesstracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Use the MySQL database backend
-        'NAME': 'fitnesstracker',          # Name of your MySQL database
+        'NAME': 'fitnesstracker1',          # Name of your MySQL database
         'USER': 'root',         # Your MySQL username
         'PASSWORD': '25082004aliK',     # Your MySQL password
         'HOST': 'localhost',                   # MySQL host, usually 'localhost'

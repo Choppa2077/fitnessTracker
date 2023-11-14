@@ -1,9 +1,12 @@
 from django.urls import path
 
-from workout.views import WorkoutCreateAPIView, WorkoutAddExerciseAPIView, WorkoutDeleteExerciseAPIView
+from workout.views import WorkoutViewSet
 
 urlpatterns = [
-    path('create/', WorkoutCreateAPIView.as_view()),
-    path('<int:workout_pk>/add-exercise/', WorkoutAddExerciseAPIView.as_view()),
-    path('<int:workout_pk>/delete-exercise/<int:pk>/', WorkoutDeleteExerciseAPIView.as_view()),
+    path('create/', WorkoutViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+    })),
+    path('delete/<int:id>', WorkoutViewSet.as_view({'get':'list','delete':'destroy'})),
+    path('update/<int:id>', WorkoutViewSet.as_view({'get':'list', 'put':'update'})),
 ]

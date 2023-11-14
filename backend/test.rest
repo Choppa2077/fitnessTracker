@@ -20,7 +20,13 @@ Content-Type: application/json
 ###
 
 
-POST http://127.0.0.1:8000/workouts/create/
+POST http://127.0.0.1:8000/workouts/add/
 Content_Type: application/json
 
-{"name":"galvin"}
+{
+    "name": "My Workout",
+    "selected_exercise_ids": [1, 2]
+}
+
+###
+
