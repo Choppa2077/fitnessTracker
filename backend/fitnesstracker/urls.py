@@ -9,4 +9,5 @@ urlpatterns = [
     path('test_token', views.test_token),
     path('exercise/', include('exercise.urls')),
     path('workouts/', include('workout.urls')),
+    path('program/', include('program.urls')),
 ]

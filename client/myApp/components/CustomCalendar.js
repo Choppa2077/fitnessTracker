@@ -15,6 +15,7 @@ import {
 import * as Icons from 'react-native-heroicons/solid';
 import {Carousel} from 'react-native-snap-carousel';
 import {useNavigation} from '@react-navigation/native';
+import {theme} from '../colors/backgrounds';
 const CustomCalendar = () => {
   const currentDate = new Date();
   const dummyData = [];
@@ -26,15 +27,7 @@ const CustomCalendar = () => {
 
     const dayOfWeek = date.getDay();
     // console.log(dayOfWeek);
-    const dayNames = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const dayName = dayNames[dayOfWeek];
 
     dummyData.push({
@@ -58,23 +51,28 @@ const CustomCalendar = () => {
       showsHorizontalScrollIndicator={false}
       className="rounded-xl"
       style={{
-        marginTop: hp(2),
+        marginTop: hp(5),
         padding: hp(2),
-        backgroundColor: backgroundColor,
+        paddingBottom: hp(3),
+        backgroundColor: theme.calendar,
       }}>
       {dummyData.map((day, index) => (
-        <View
-          key={index}
-          className="rounded-md mx-2"
-          style={[day.isToday && {backgroundColor: today}]}>
-          <View className="flex-column items-center">
-            <Text className="font-bold text-white" style={{fontSize: hp(2)}}>
+        <View key={index} className="mx-2 flex-1 items-center">
+          
+          <Text className="font-bold text-white " style={{fontSize: hp(2)}}>
+            {`${day.dayOfWeek} `}
+          </Text>
+          <View
+            style={[
+              day.isToday
+                ? {backgroundColor: theme.newMainColor, width:hp(4), height:hp(4)}
+                : {backgroundColor: theme.calendarItems, width:hp(4), height:hp(4)},
+            ]}
+            className="flex-column justify-center first-line:rounded-full items-center mt-2">
+            <Text className="font-bold text-black " style={{fontSize: hp(2)}}>
               {`${day.date}`}
             </Text>
           </View>
-          <Text className="font-bold text-white" style={{fontSize: hp(2)}}>
-            {`${day.dayOfWeek} `}
-          </Text>
         </View>
       ))}
     </ScrollView>

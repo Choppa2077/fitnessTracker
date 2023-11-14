@@ -16,59 +16,43 @@ import {
 } from 'react-native-responsive-screen';
 import {theme} from '../colors/backgrounds';
 import {useNavigation} from '@react-navigation/native';
+import ButtonAndAlreadyHave from '../components/ButtonAndAlreadyHave';
+import BackgroundAndCenterContent from '../components/BackgroundAndCenterContent';
+import GoBackButton from '../components/GoBackButton';
+import * as Icons from 'react-native-heroicons/solid';
+import Form from '../components/Form';
+import EditInputs from '../components/EditInputs';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState('');
+  const navigation = useNavigation();
+  const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   return (
-    <View className="flex-1 items-center justify-center">
-      <Text
-        className="font-bold text-black"
-        style={{fontSize: hp(3), marginBottom: hp(2)}}>
-        Register now
-      </Text>
-      <View>
-        <TextInput
-          placeholder="Name"
-          value={email}
-          onChangeText={text => setEmail(text)}
-          className="rounded-full"
-          style={{
-            backgroundColor: 'white',
-            width: hp(30),
-            marginBottom: hp(3),
-            fontSize: hp(2.5),
-          }}
+    <View className="flex-1 items-center ">
+      <BackgroundAndCenterContent source={require('../images/newWelcome.jpg')}/>
+      <GoBackButton navigation={navigation} />
+      <View className="absolute top-32" style={{marginBottom: hp(10)}}>
+        <Text style={{fontSize: hp(5)}} className="text-white font-bold">
+          Login
+        </Text>
+      </View>
+      <View className="flex-1 justify-center">
+        <EditInputs
+          textParam={emailAddress}
+          setInput={setEmailAddress}
+          placeholder={'Email Address'}
+        />
+        <EditInputs
+          textParam={password}
+          setInput={setPassword}
+          placeholder={'Password'}
         />
       </View>
-      <View>
-        <TextInput
-          placeholder="Email"
-          value={password}
-          onChangeText={text => setPassword(text)}
-          className="rounded-full"
-          style={{
-            backgroundColor: 'white',
-            width: hp(30),
-            marginBottom: hp(3),
-            fontSize: hp(2.5),
-          }}
-        />
-      </View>
-
-      <View>
-        <TouchableOpacity
-          className="rounded-xl"
-          style={{
-            backgroundColor: theme.secondary,
-            paddingHorizontal: hp(2),
-            paddingVertical: hp(1),
-          }}>
-          <Text className="font-bold text-white" style={{fontSize: hp(3)}}>
-            Sign up
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <ButtonAndAlreadyHave
+        navigation={navigation}
+        mainColor={theme.newMainColor}
+        signUpOrLogin={'Login'}
+      />
     </View>
   );
 };
