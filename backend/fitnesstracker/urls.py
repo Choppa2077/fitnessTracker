@@ -7,6 +7,7 @@ urlpatterns = [
     path('login', views.login),
     path('signup', views.signup),
     path('test_token', views.test_token),
+    path('profile/', include('user.urls')),
     path('exercise/', include('exercise.urls')),
     path('workouts/', include('workout.urls')),
     path('program/', include('program.urls')),

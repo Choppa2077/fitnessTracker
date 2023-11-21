@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'program',
     'workout',
     'exercise',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -82,9 +83,9 @@ WSGI_APPLICATION = 'fitnesstracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Use the MySQL database backend
-        'NAME': 'fitnesstracker1',          # Name of your MySQL database
+        'NAME': 'database',          # Name of your MySQL database
         'USER': 'root',         # Your MySQL username
-        'PASSWORD': '25082004aliK',     # Your MySQL password
+        'PASSWORD': '2508',     # Your MySQL password
         'HOST': 'localhost',                   # MySQL host, usually 'localhost'
         'PORT': '3306', 
     }
@@ -108,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+AUTH_USER_MODEL = 'user.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

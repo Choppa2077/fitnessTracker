@@ -23,16 +23,16 @@ const MyWorkoutList = ({data, onWorkoutNameChange}) => {
   const navigation = useNavigation();
   const [selectedItem, setSelectedItem] = useState(null);
 
-
+  // Function to handle card click and open the modal
   const openModal = item => {
     setSelectedItem(item); // Set the selected item when a card is clicked
   };
 
   // Function to navigate to the 'Workout' screen
-  const navigateToProgram = item => {
+  const navigateToWorkout = item => {
     lengthOfGivenData === 0
       ? navigation.navigate('EditWorkout', item)
-      : navigation.navigate('Program', item);
+      : navigation.navigate('Workout', item);
   };
 
   // Function to close the modal
@@ -57,7 +57,7 @@ const MyWorkoutList = ({data, onWorkoutNameChange}) => {
             item={data}
             openModal={openModal}
             itemsCenter={itemsCenter}
-            navigateToProgram={navigateToProgram}
+            navigateToWorkout={navigateToWorkout}
             lengthOfGivenData={lengthOfGivenData}
             insideText="Create a Workout routine"
             onWorkoutNameChange={onWorkoutNameChange}
@@ -78,7 +78,7 @@ const MyWorkoutList = ({data, onWorkoutNameChange}) => {
                 item={item}
                 openModal={openModal}
                 itemsCenter={' '}
-                navigateToProgram={navigateToProgram}
+                navigateToWorkout={navigateToWorkout}
                 lengthOfGivenData={lengthOfGivenData}
                // insideText="Abs"
                onWorkoutNameChange={onWorkoutNameChange}

@@ -8,7 +8,7 @@ Content-Type: application/json
 POST http://127.0.0.1:8000/signup
 Content-Type: application/json
 
-{ "username":"zack", "password":"Pass1234!", "email":"zack@gmail.com" }
+{"username":"zack2", "password":"Pass1234!","email":"zack2@gmail.com"  }
 
 ###
 

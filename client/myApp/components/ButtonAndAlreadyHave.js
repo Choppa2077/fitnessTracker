@@ -16,60 +16,71 @@ import {
 } from 'react-native-responsive-screen';
 import {theme} from '../colors/backgrounds';
 
-const ButtonAndAlreadyHave = ({route, navigation, mainColor, signUpOrLogin, drawSignUp, drawLogin}) => {
+const ButtonAndAlreadyHave = ({
+  navigation,
+  buttonColor,
+  orAndIcons,
+  loginTextColor,
+  marg,
+}) => {
   return (
-    <View className="items-center absolute bottom-10" 
-   // style={{marginTop: hp(60)}}
-   
-    >
+    <View>
       <View>
         <TouchableOpacity
-        //  onPress={() => navigation.navigate(route)}
-          // onPress={drawSignUp}
-          className="rounded-3xl items-center"
+          onPress={() => navigation.navigate('Register')}
+          className="rounded-xl items-center"
           style={{
-            backgroundColor: mainColor,
-            paddingHorizontal: hp(3),
-            paddingVertical: hp(2),
-            width: hp(34),
+            backgroundColor: buttonColor,
+            paddingHorizontal: hp(2),
+            paddingVertical: hp(1),
           }}>
           <Text className="font-bold text-white" style={{fontSize: hp(3)}}>
-            {signUpOrLogin}
+            Sign Up
           </Text>
         </TouchableOpacity>
       </View>
-      <View className="items-center" style={{marginTop: hp(2)}}>
+      {orAndIcons ? (
+        <View>
+          <View style={{marginVertical: hp(2)}} className="items-center">
+            <Text style={{fontSize: hp(3)}} className="text-white font-bold">
+              Or
+            </Text>
+          </View>
+
+          <View
+            className="flex-row justify-between "
+            style={{marginBottom: hp(4)}}>
+            <View>
+              <Image
+                source={require('../images/googleSign.png')}
+                style={{width: hp(5), height: hp(5)}}
+              />
+            </View>
+            <View>
+              <Image
+                source={require('../images/twitter.png')}
+                style={{width: hp(5), height: hp(5)}}
+              />
+            </View>
+            <View>
+              <Image
+                source={require('../images/facebook.png')}
+                style={{width: hp(5), height: hp(5)}}
+              />
+            </View>
+          </View>
+        </View>
+      ) : (
+        <Text></Text>
+      )}
+
+      <View className="items-center" style={{}}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
           <Text className="text-white font-bold" style={{fontSize: hp(2)}}>
             Already have an account?
-            <Text style={{color: mainColor}}> Log in</Text>
+            <Text style={{color: loginTextColor}}> Log in</Text>
           </Text>
         </TouchableWithoutFeedback>
-      </View>
-
-      <View className="items-center">
-        <View
-          className="flex-row justify-between"
-          style={{marginTop: hp(3), width: hp(20)}}>
-          <View>
-            <Image
-              source={require('../images/googleSign.png')}
-              style={{width: hp(5), height: hp(5)}}
-            />
-          </View>
-          <View>
-            <Image
-              source={require('../images/twitter.png')}
-              style={{width: hp(5), height: hp(5)}}
-            />
-          </View>
-          <View>
-            <Image
-              source={require('../images/facebook.png')}
-              style={{width: hp(5), height: hp(5)}}
-            />
-          </View>
-        </View>
       </View>
     </View>
   );
