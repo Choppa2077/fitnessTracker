@@ -22,7 +22,7 @@ import {theme} from '../colors/backgrounds';
 const Sets = () => {
   return (
     <View
-      style={{marginRight: hp(1), backgroundColor: theme.secondary}}
+      style={{marginRight: hp(1), backgroundColor: theme.input}}
       className=" flex-1 items-center justify-center rounded-xl">
       <Text className="text-white">20 x</Text>
       <Text className="text-white">2 kg</Text>

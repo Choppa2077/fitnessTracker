@@ -32,7 +32,7 @@ const MyWorkoutList = ({data, onWorkoutNameChange}) => {
   const navigateToWorkout = item => {
     lengthOfGivenData === 0
       ? navigation.navigate('EditWorkout', item)
-      : navigation.navigate('Workout', item);
+      : navigation.navigate('Program', item);
   };
 
   // Function to close the modal

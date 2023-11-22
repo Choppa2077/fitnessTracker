@@ -15,6 +15,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {theme} from '../colors/backgrounds';
+import MainButton from './MainButton';
 
 const ButtonAndAlreadyHave = ({
   navigation,
@@ -73,17 +74,6 @@ const ButtonAndAlreadyHave = ({
       ) : (
         <Text></Text>
       )}
-
-      <View className="items-center" style={{}}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
-          <Text className="text-white font-bold" style={{fontSize: hp(2)}}>
-            Already have an account?
-            <Text style={{color: loginTextColor}}> Log in</Text>
-          </Text>
-        </TouchableWithoutFeedback>
-      </View>
     </View>
   );
 };
-
-export default ButtonAndAlreadyHave;

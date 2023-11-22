@@ -17,6 +17,7 @@ import ReadyWorkoutList from '../components/ReadyWorkoutList';
 import CustomCalendar from '../components/CustomCalendar';
 import {theme} from '../colors/backgrounds';
 import {useNavigation} from '@react-navigation/native';
+import AddButton from '../components/AddButton';
 
 const HomeScreen = () => {
   const [myWorkoutList, setMyWorkoutList] = useState([1, 2, 3, 4, 5]);
@@ -25,7 +26,6 @@ const HomeScreen = () => {
   const [workoutName, setWorkoutName] = useState(''); // State to store workoutName
   // const [backendData, setBackendData] = useState([{}]);
 
-  
   // useEffect(() => {
   //   fetch('http://192.168.79.49:8000/get-json-data/')
   //     .then(response => response.json())
@@ -81,15 +81,6 @@ const HomeScreen = () => {
       />
 
       <ReadyWorkoutList data={readyWorkoutList} />
-      {/* <CreateWorkoutButton/> */}
-      <View
-        className="flex-1 items-end justify-center"
-        style={{height: hp(10), marginTop: hp(2)}}>
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate('EditWorkout')}>
-          <Icons.PlusCircleIcon size={hp(7)} color={theme.secondary} />
-        </TouchableWithoutFeedback>
-      </View>
     </ScrollView>
   );
 };
