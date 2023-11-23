@@ -7,31 +7,9 @@ import {
 import {theme} from '../colors/backgrounds';
 import * as Icons from 'react-native-heroicons/solid';
 import VerticalLine from './VerticalLine';
-import Modal from './ModalView';
-import {useNavigation} from '@react-navigation/native';
-import ModalView from './ModalView';
 
 const Days = ({lines}) => {
-  const navigation = useNavigation();
-  const [isModalVisible, setModalVisible] = useState(false);
-  const showModal = () => {
-    setModalVisible(true);
-    console.log('something doing');
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
-  const deleteWorkout = () => {};
-
-  const editWorkout = () => {};
-
-  const saveWorkout = () => {
-    // Handle saving the workout here
-    closeModal();
-  };
-
+  
   return (
     <View
       className="flex-row justify-evenly items-center"
@@ -42,7 +20,7 @@ const Days = ({lines}) => {
           style={{backgroundColor: 'white', width: hp(5), height: hp(5)}}>
           <Text className="text-black font-bold">Sun</Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Workout')}>
+        <View>
           <View>
             <Text className="text-white font-bold" style={{fontSize: hp(2.3)}}>
               Workout A
@@ -59,19 +37,15 @@ const Days = ({lines}) => {
               3 exercises
             </Text>
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
       <View>
-        <TouchableOpacity onPress={showModal}>
-          <Icons.AdjustmentsVerticalIcon size={hp(4)} color={'white'} />
-        </TouchableOpacity>
-        <ModalView
-          isModalVisible={isModalVisible}
-          deleteWorkout={deleteWorkout}
-          editWorkout={editWorkout}
-          closeModal={closeModal}
-        />
+        <Icons.ChartBarIcon size={12} color="white" 
+        // onPress={showModal}
+         />
+        {/*  */}
       </View>
+      
     </View>
   );
 };

@@ -58,16 +58,22 @@ const CustomCalendar = () => {
       }}>
       {dummyData.map((day, index) => (
         <View key={index} className="mx-2 flex-1 items-center">
-          
           <Text className="font-bold text-white " style={{fontSize: hp(2)}}>
-         {`${day.dayOfWeek}`
-}
+            {`${day.dayOfWeek}`}
           </Text>
           <View
             style={[
               day.isToday
-                ? {backgroundColor: theme.newMainColor, width:hp(4), height:hp(4)}
-                : {backgroundColor: theme.calendarItems, width:hp(4), height:hp(4)},
+                ? {
+                    backgroundColor: theme.newMainColor,
+                    width: hp(4),
+                    height: hp(4),
+                  }
+                : {
+                    backgroundColor: theme.calendarItems,
+                    width: hp(4),
+                    height: hp(4),
+                  },
             ]}
             className="flex-column justify-center first-line:rounded-full items-center mt-2">
             <Text className="font-bold text-black " style={{fontSize: hp(2)}}>
