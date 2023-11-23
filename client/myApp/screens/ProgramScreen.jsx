@@ -1,5 +1,5 @@
 import {View, Text, ScrollView} from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import GoBackButton from '../components/GoBackButton';
 import {useNavigation} from '@react-navigation/native';
 import {theme} from '../colors/backgrounds';
@@ -10,21 +10,12 @@ import {
 import ReadyWorkoutCard from '../components/ReadyWorkoutCard';
 import HorizontalLine from '../components/HorizontalLine';
 import DaysList from '../components/DaysList';
-import Modal from '../components/ModalView';
-import AddButton from '../components/AddButton';
-import EditWorkoutModal from '../components/EditWorkoutModal';
 
 const ProgramScreen = () => {
   const navigation = useNavigation();
-  const [isWorkoutModalVisible, setWorkoutModalVisible] = useState(false);
-  const [workoutName, setWorkoutName] = useState('');
-
-  const showWorkoutModal = () => {
-    setWorkoutModalVisible(true);
-    console.log("Workout Modal pressed");
-  };
-  const closeWorkoutModal = () => {
-    setWorkoutModalVisible(false);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const showModal = () => {
+    setModalVisible(true);
   };
   return (
     <View className="flex-1">
@@ -38,7 +29,7 @@ const ProgramScreen = () => {
           </Text>
         </View>
         <View className=" items-center">
-          <ReadyWorkoutCard
+        <ReadyWorkoutCard
             item=""
             navigateToProgram={''}
             title={'Abdomen'}
@@ -54,8 +45,6 @@ const ProgramScreen = () => {
           <DaysList />
           {/* <Modal isModalVisible={isModalVisible} /> */}
         </View>
-        <AddButton showWorkoutModal={showWorkoutModal}/>
-        <EditWorkoutModal isWorkoutModalVisible={isWorkoutModalVisible} closeWorkoutModal={closeWorkoutModal}/>
       </ScrollView>
     </View>
   );
