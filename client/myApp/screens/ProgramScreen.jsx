@@ -42,9 +42,9 @@ const ProgramScreen = () => {
             item=""
             navigateToProgram={''}
             title={'Abdomen'}
-            h={25}
+            h={hp(27)}
             icon={false}
-            w={80}
+            w={wp(80)}
           />
         </View>
         <View className="items-center" style={{marginTop: hp(4)}}>

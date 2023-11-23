@@ -18,6 +18,7 @@ import * as Icons from 'react-native-heroicons/solid';
 import Carousel from 'react-native-snap-carousel';
 import {useNavigation} from '@react-navigation/native';
 import {theme} from '../colors/backgrounds';
+import BackgroundAndCenterContent from './BackgroundAndCenterContent';
 
 const MyWorkoutCard = ({
   item,
@@ -50,13 +51,19 @@ const MyWorkoutCard = ({
       <View
         style={{
           width: wp(70),
-          height: hp(20),
+          height: hp(17),
           backgroundColor: theme.secondary,
         }}
         className={
-          'flex-row relative mt-4 rounded-l-md rounded-r-md px-2 justify-between ' +
+          'flex-row relative mt-4 rounded-3xl px-2 justify-between ' +
           itemsCenter
         }>
+        <BackgroundAndCenterContent
+          source={require('../images/workoutCard3.jpg')}
+          width={wp(70)}
+          height={hp(17)}
+          rounded={true}
+        />
         <View className="flex-column justify-center">
           <View style={{width: hp(24)}}>
             <Text
@@ -68,12 +75,11 @@ const MyWorkoutCard = ({
             </Text>
           </View>
         </View>
-        <View className="absolute" style={{bottom: hp(0), right: hp(0)}}>
-          <Image
-            style={{height: hp(8.5), width: wp(30)}}
-            source={require('../images/gantels.png')}
-          />
-        </View>
+        {/* <View className="absolute" style={{bottom: hp(0), left: hp(0)}}>
+          <Text>
+
+          </Text>
+        </View> */}
 
         <TouchableOpacity onPress={showModal}>
           {lengthOfGivenData === 0 ? (
@@ -124,7 +130,6 @@ const MyWorkoutCard = ({
                       }}
                     />
                   </View>
-
                   <View>
                     <Text
                       className="text-white"
