@@ -20,9 +20,9 @@ import ButtonAndAlreadyHave from '../components/ButtonAndAlreadyHave';
 import BackgroundAndCenterContent from '../components/BackgroundAndCenterContent';
 import GoBackButton from '../components/GoBackButton';
 import * as Icons from 'react-native-heroicons/solid';
-import Form from '../components/Form';
-import EditInputs from '../components/EditInputs';
-import {err} from 'react-native-svg/lib/typescript/xml';
+
+import EditInputs from '../compone nts/EditInputs';
+// import {err} from 'react-native-svg/lib/typescript/xml';
 import MainButton from '../components/MainButton';
 
 const RegisterScreen = () => {
