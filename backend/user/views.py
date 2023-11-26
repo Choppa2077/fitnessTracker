@@ -1,19 +1,41 @@
-from django.shortcuts import render
-from .models import UserProfile
-from .serializers import UserProfileSerializer
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
+from django.db import transaction
 
-from rest_framework import generics 
+from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, UpdateAPIView
+from .serializers import CreateUserSerializer, UpdateUserSerializer, ChangeUserPasswordSerializer
 
-# Create your views here.
 
-class UserProfileCreateAPIView(generics.CreateAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
+class CreateUserCreateAPIView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = CreateUserSerializer
 
-class UserProfileListAPIView(generics.ListAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
+    @transaction.atomic
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
 
-class UserProfileEditAPIView(generics.RetrieveAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
+
+class UpdateUserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = UpdateUserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+    @transaction.atomic
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+
+
+class ChangePasswordRetrieveUpdateAPIView(UpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = ChangeUserPasswordSerializer
+
+    def get_object(self):
+        return self.request.user
+
+    @transaction.atomic
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
