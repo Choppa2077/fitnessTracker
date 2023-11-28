@@ -11,4 +11,3 @@
 #     # exercise_type = models.CharField(max_length=50)
 #     image_url = models.URLField(max_length=255)
 #
-#

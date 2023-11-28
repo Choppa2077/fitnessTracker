@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'program.apps.ProgramConfig',
-    'workout.apps.WorkoutConfig',
+    'admin.apps.WorkoutConfig',
     'exercise.apps.ExerciseConfig',
     'user.apps.UserConfig',
 
