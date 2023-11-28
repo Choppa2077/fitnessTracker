@@ -77,7 +77,7 @@ const EditInputs = ({textParam, setInput, placeholder}) => {
     // </View>
     <View className="z-30" style={{marginBottom: hp(3)}}>
       <TextInput
-        className=" rounded-3xl"
+        className=" rounded-full relative"
         placeholderTextColor="white"
         placeholder={placeholder}
         value={textParam}
@@ -87,8 +87,14 @@ const EditInputs = ({textParam, setInput, placeholder}) => {
           width: hp(35),
           fontSize: hp(2.5),
           paddingVertical: hp(3),
-          paddingLeft:hp(2)
+          paddingLeft: hp(2),
+          height: hp(6),
         }}
+      />
+      <Icons.MagnifyingGlassCircleIcon
+        className="absolute right-0 top-0 bottom-0"
+        size={hp(6)}
+        color={'white'}
       />
     </View>
   );

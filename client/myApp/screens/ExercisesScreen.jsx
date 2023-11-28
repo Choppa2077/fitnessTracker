@@ -71,7 +71,7 @@ const ExercisesScreen = () => {
           <EditInputs
             textParam={searchInput}
             setInput={handleSearch}
-            placeholder={'Username'}
+            placeholder={'Search anything'}
             paddingVertical={hp(1.3)}
             width={hp(39)}
             withIcon={true}

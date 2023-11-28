@@ -25,7 +25,7 @@ const ProfileScreen = () => {
               marginTop: hp(2.4),
             }}></Text>
         </View>
-        <View className="items-center">
+        <View className="items-center my-5">
           <View
             className=" rounded-t-3xl"
             style={{
@@ -56,7 +56,7 @@ const ProfileScreen = () => {
               </View>
             </View>
             <View className="items-center my-4">
-              <Text className="text-white mb-4">@MukanIdrissov</Text>
+              <Text className="text-white mb-4" style={{fontSize:hp(3)}}>@MukanIdrissov</Text>
               <HorizontalLine height={2} width={'80%'} />
             </View>
             <View className="items-center">

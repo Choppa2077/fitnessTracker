@@ -69,21 +69,7 @@ export default function BottomTabs() {
         component={EditExercisesScreen}
       />
 
-      <Tab.Screen
-        options={{
-          tabBarLabel: 'Create',
-          tabBarLabelStyle: {
-            position: 'absolute',
-            bottom: 10,
-            fontSize: hp(1.3),
-          },
-          tabBarIcon: ({color, size}) => (
-            <Icons.CubeIcon name="home" color={'white'} size={24} />
-          ),
-        }}
-        name="Create"
-        component={CreateWorkoutScreen}
-      />
+      
       <Tab.Screen
         options={{
           tabBarLabel: 'Exercises',

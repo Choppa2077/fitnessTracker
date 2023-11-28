@@ -98,7 +98,7 @@ const EditWorkoutScreen = () => {
               </View>
               <View>
                 <Text className=" text-gray-400">Duration</Text>
-                <Text className="text-white font-bold">20-30 min</Text>
+                <Text className="text-white font-bold">20-50 min</Text>
               </View>
             </View>
             <View className="flex-row">

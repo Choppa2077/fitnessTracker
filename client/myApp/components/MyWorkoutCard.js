@@ -19,8 +19,10 @@ import Carousel from 'react-native-snap-carousel';
 import {useNavigation} from '@react-navigation/native';
 import {theme} from '../colors/backgrounds';
 import BackgroundAndCenterContent from './BackgroundAndCenterContent';
+import ModalView from './ModalView';
 
 const MyWorkoutCard = ({
+  myWorkoutList,
   item,
   itemsCenter,
   navigateToWorkout,
@@ -29,7 +31,7 @@ const MyWorkoutCard = ({
   onWorkoutNameChange, // Add this prop
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [workoutName, setWorkoutName] = useState('');
+  // const [workoutName, setWorkoutName] = useState('');
   const [description, setDescription] = useState('');
 
   const showModal = () => {
@@ -39,11 +41,11 @@ const MyWorkoutCard = ({
   const closeModal = () => {
     setModalVisible(false);
   };
-
-  const saveWorkout = () => {
-    // Handle saving the workout here
-    onWorkoutNameChange(workoutName); // Call the callback with workoutName
-    closeModal();
+  const editProgram = () => {
+    setModalVisible(false);
+  };
+  const deleteProgram = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -71,7 +73,7 @@ const MyWorkoutCard = ({
               style={{
                 fontSize: hp(3),
               }}>
-              {lengthOfGivenData === 0 ? insideText : workoutName}
+              {myWorkoutList}
             </Text>
           </View>
         </View>
@@ -88,93 +90,12 @@ const MyWorkoutCard = ({
             <Icons.Bars3Icon size={hp(4)} color={'white'} />
           )}
         </TouchableOpacity>
-        {lengthOfGivenData != 0 ? (
-          <Modal
-            transparent={true}
-            visible={isModalVisible}
-            animationType="fade">
-            <View className="flex-1  items-center justify-center">
-              <View
-                className="p-8 rounded-lg items-center "
-                style={{
-                  backgroundColor: theme.background,
-                  width: hp(40),
-                  height: hp(50),
-                }}>
-                <View>
-                  <Text
-                    className="font-extrabold"
-                    style={{
-                      fontSize: hp(3),
-                      marginBottom: hp(1),
-                      color: theme.secondary,
-                    }}>
-                    Create a workout routine
-                  </Text>
-                  <View>
-                    <Text
-                      className="text-white"
-                      style={{fontSize: hp(2), marginBottom: hp(1)}}>
-                      Name
-                    </Text>
-                    <TextInput
-                      placeholder="Workout Name"
-                      value={workoutName}
-                      onChangeText={text => setWorkoutName(text)}
-                      className="rounded-full"
-                      style={{
-                        backgroundColor: 'white',
-                        width: hp(30),
-                        marginBottom: hp(3),
-                        fontSize: hp(2.5),
-                      }}
-                    />
-                  </View>
-                  <View>
-                    <Text
-                      className="text-white"
-                      style={{fontSize: hp(2), marginBottom: hp(1)}}>
-                      Details
-                    </Text>
-                    <TextInput
-                      placeholder="Description(Optional)"
-                      value={description}
-                      onChangeText={text => setDescription(text)}
-                      className=" rounded-3xl"
-                      style={{
-                        backgroundColor: 'white',
-                        width: hp(30),
-                        height: hp(10),
-                        marginBottom: hp(3),
-                        fontSize: hp(2.5),
-                      }}
-                    />
-                  </View>
-                </View>
-                <View
-                  style={{width: hp(40)}}
-                  className="flex-row justify-evenly">
-                  <TouchableOpacity onPress={closeModal}>
-                    <Text
-                      style={{color: theme.close, fontSize: hp(2.5)}}
-                      className="font-bold">
-                      Cancel
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={saveWorkout}>
-                    <Text
-                      style={{color: theme.secondary, fontSize: hp(2.5)}}
-                      className="font-bold">
-                      Save
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </Modal>
-        ) : (
-          <View />
-        )}
+        <ModalView
+          isModalVisible={isModalVisible}
+          deleteWorkout={deleteProgram}
+          editWorkout={editProgram}
+          closeModal={closeModal}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

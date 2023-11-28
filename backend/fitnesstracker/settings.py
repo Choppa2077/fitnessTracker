@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'database',          # Name of your MySQL database
         'USER': 'root',         # Your MySQL username
         'PASSWORD': '2508',     # Your MySQL password
-        'NAME': 'testProgram',          # Name of your MySQL database
+        'NAME': 'fitness',          # Name of your MySQL database
         'USER': 'root',         # Your MySQL username
         'PASSWORD': 'm511',     # Your MySQL password
         'HOST': 'localhost',                   # MySQL host, usually 'localhost'
@@ -146,4 +146,4 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 # settings.py
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.100.11']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.100.11', "10.48.136.82"]

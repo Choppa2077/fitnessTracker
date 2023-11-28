@@ -19,10 +19,10 @@ import {theme} from '../colors/backgrounds';
 import CreateWorkoutButton from '../components/CreateWorkoutButton';
 import {useNavigation} from '@react-navigation/native';
 
-const AddButton = ({showWorkoutModal}) => {
+const AddButton = ({showModal}) => {
   return (
     <View className=" items-end" style={{marginTop:hp(5), paddingHorizontal: hp(2)}}>
-      <TouchableWithoutFeedback onPress={showWorkoutModal}>
+      <TouchableWithoutFeedback onPress={showModal}>
         <Icons.PlusCircleIcon size={hp(8)} color={theme.newMainColor} />
       </TouchableWithoutFeedback>
     </View>

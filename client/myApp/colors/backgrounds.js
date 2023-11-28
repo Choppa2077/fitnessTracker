@@ -14,6 +14,11 @@ export const theme = {
   backgorundProfile: 'rgb(120,119,119)',
   backgorundProfile2: 'rgb(73,73,73)',
 };
+const workoutDay = {
+  "Mon":true,
+  "Wed":true,
+  "Fri":true,
+}
 // export const styles = {
 //   primaryText: {color: theme.primaryText},
 //   background: {background: theme.background},
