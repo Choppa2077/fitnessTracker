@@ -25,7 +25,7 @@ const EditExercisesScreen = () => {
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [setsArray, setSetsArray] = useState([{reps: 0, load: 0}]);
-  const [sameRepsSets, setSamRepsSets] = useState([{sets:1, reps: 0, load: 0}])
+
 
   const addRow = () => {
     const newRow = {reps: 0, load: 0};
@@ -97,9 +97,9 @@ const EditExercisesScreen = () => {
             item=""
             navigateToProgram={''}
             title={''}
-            h={18}
+            h={hp(17)}
             icon={false}
-            w={80}
+            w={wp(80)}
           />
         </View>
         <View className="items-center mt-5 mb-2">
@@ -140,7 +140,12 @@ const EditExercisesScreen = () => {
         </View>
         <View className="items-center mt-5 mb-2">
           {toggleCheckBox ? (
-            <SameRepsPlusMinus />
+            <SameRepsPlusMinus
+              // minusRepsHandler={minusRepsHandler}
+              // plusRepsHandler={plusRepsHandler}
+              // minusLoadHandler={minusLoadHandler}
+              // plusLoadHandler={plusLoadHandler}
+            />
           ) : (
             <PlusMinus
               toggleCheckBox={toggleCheckBox}
@@ -158,19 +163,19 @@ const EditExercisesScreen = () => {
           <SetTime />
         </View>
       </ScrollView>
-      <View className="items-center ">
-        <View className="items-center flex-row" style={{width: '85%'}}>
+      <View className="items-center">
+        <View className="items-center flex-row py-6" style={{width: '85%'}}>
           <MainButton
-            absoluteBottom={'absolute bottom-4  right-0'}
+            absoluteBottom={'absolute bottom-24  left-0'}
             route={''}
             navigation={navigation}
             width={hp(19)}
             rounded={'rounded-2xl'}
             fontLarge={hp(2.5)}
-            signUpOrLogin={'Cancle'}
+            signUpOrLogin={'Cancel'}
           />
           <MainButton
-            absoluteBottom={'absolute bottom-4 left-0 '}
+            absoluteBottom={'absolute bottom-24 right-0 '}
             route={''}
             navigation={navigation}
             width={hp(19)}

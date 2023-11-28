@@ -11,6 +11,8 @@ export const theme = {
   calendar: 'rgb(65,65,65)',
   calendarItems: 'rgba(217, 217, 217, 1)',
   line: 'rgb(91,91,91)',
+  backgorundProfile: 'rgb(120,119,119)',
+  backgorundProfile2: 'rgb(73,73,73)',
 };
 // export const styles = {
 //   primaryText: {color: theme.primaryText},

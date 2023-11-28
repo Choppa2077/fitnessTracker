@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'database',          # Name of your MySQL database
         'USER': 'root',         # Your MySQL username
         'PASSWORD': '2508',     # Your MySQL password
-        'NAME': 'fitness_tracker',          # Name of your MySQL database
+        'NAME': 'testProgram',          # Name of your MySQL database
         'USER': 'root',         # Your MySQL username
         'PASSWORD': 'm511',     # Your MySQL password
         'HOST': 'localhost',                   # MySQL host, usually 'localhost'

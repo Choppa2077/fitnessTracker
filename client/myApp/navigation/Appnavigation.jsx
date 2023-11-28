@@ -14,6 +14,7 @@ import WorkoutScreen from '../screens/WorkoutScreen';
 import ExercisesScreen from '../screens/ExercisesScreen';
 import SetOfExercisesScreen from '../screens/SetOfExercisesScreen';
 import EditExercisesScreen from '../screens/EditExercisesScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +22,7 @@ const Appnavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Profile"
         screenOptions={{headerShown: false}}>
         {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
         <Stack.Screen name="Register" component={RegisterScreen} />
@@ -32,6 +33,7 @@ const Appnavigation = () => {
         <Stack.Screen name="Exercises" component={ExercisesScreen} />
         <Stack.Screen name="SetOfExercises" component={SetOfExercisesScreen} />
         <Stack.Screen name="EditExercises" component={EditExercisesScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

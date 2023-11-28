@@ -1,18 +1,18 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-const VerticalLine = ({left, color, width, height}) => {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+  } from 'react-native-responsive-screen';
+const VerticalLine = ({ color, width, height }) => {
   return (
     <View
-    className=""
+    className="left-24"
       style={{
         backgroundColor: color || 'white',
         width: width || 1,
         height: height || hp(7),
-        left: left || 0,
+
       }}
     />
   );

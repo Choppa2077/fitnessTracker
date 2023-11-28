@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import React, {useState} from 'react';
 import {
   widthPercentageToDP as wp,
@@ -7,9 +7,31 @@ import {
 import {theme} from '../colors/backgrounds';
 import * as Icons from 'react-native-heroicons/solid';
 import VerticalLine from './VerticalLine';
+import {useNavigation} from '@react-navigation/native';
+import ModalView from './ModalView';
 
 const Days = ({lines}) => {
-  
+  const navigation = useNavigation();
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const deleteWorkout = () => {
+    setModalVisible(false);
+  };
+
+  const editWorkout = () => {
+    setModalVisible(false);
+    navigation.navigate("EditExercises")
+
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View
       className="flex-row justify-evenly items-center"
@@ -20,7 +42,7 @@ const Days = ({lines}) => {
           style={{backgroundColor: 'white', width: hp(5), height: hp(5)}}>
           <Text className="text-black font-bold">Sun</Text>
         </View>
-        <View>
+        <TouchableOpacity onPress={() => navigation.navigate('Workout')}>
           <View>
             <Text className="text-white font-bold" style={{fontSize: hp(2.3)}}>
               Workout A
@@ -37,15 +59,22 @@ const Days = ({lines}) => {
               3 exercises
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
-      <View>
-        <Icons.ChartBarIcon size={12} color="white" 
-        // onPress={showModal}
-         />
+      <TouchableWithoutFeedback onPress={showModal}>
+        <Icons.ChartBarIcon
+          size={12}
+          color="white"
+          // onPress={showModal}
+        />
         {/*  */}
-      </View>
-      
+      </TouchableWithoutFeedback>
+      <ModalView
+        isModalVisible={isModalVisible}
+        deleteWorkout={deleteWorkout}
+        editWorkout={editWorkout}
+        closeModal={closeModal}
+      />
     </View>
   );
 };
