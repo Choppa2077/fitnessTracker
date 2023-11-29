@@ -1,8 +1,9 @@
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
+from rest_framework.permissions import IsAdminUser
 
 from django.db import transaction
 
@@ -14,7 +15,7 @@ from .serializers import (
 from .models import ProgramModel, WorkoutModel, ExerciseModel
 
 
-class ProgramModelAPIViewSet(ReadOnlyModelViewSet):
+class ProgramModelAPIReadOnlyModelViewSet(ReadOnlyModelViewSet):
     queryset = ProgramModel.objects.all()
     serializer_class = ProgramModelSerializerCover
 
@@ -25,7 +26,7 @@ class ProgramModelAPIViewSet(ReadOnlyModelViewSet):
             return ProgramModelSerializerDetail
 
 
-class WorkoutModelAPIViewSet(ReadOnlyModelViewSet):
+class WorkoutModelAPIReadOnlyModelViewSet(ReadOnlyModelViewSet):
     queryset = WorkoutModel.objects.all()
     serializer_class = WorkoutModelSerializerCover
 
@@ -36,7 +37,7 @@ class WorkoutModelAPIViewSet(ReadOnlyModelViewSet):
             return WorkoutModelSerializerDetail
 
 
-class ExercisesModelAPIViewSet(ReadOnlyModelViewSet):
+class ExercisesModelAPIReadOnlyModelViewSet(ReadOnlyModelViewSet):
     queryset = ExerciseModel.objects.all()
     serializer_class = ExercisesModelSerializerCover
 
@@ -48,24 +49,22 @@ class ExercisesModelAPIViewSet(ReadOnlyModelViewSet):
 
 
 class ProgramCreateUpdateAPIView(APIView):
+    permission_classes = [IsAdminUser]
 
     @transaction.atomic
     def post(self, request):
         try:
-
-            print("Step 1")
+            # print("Step 1")
             program_data = self._check_and_get_data(request.data, 'program')
-
-            print("Step 2")
+            # print("Step 2")
             workouts_data = self._check_and_get_data(program_data, 'workouts')
 
-            print("Step 3")
+            # print("Step 3")
             program_data['workouts'] = self._create_update_workouts(workouts_data)
-
-            print("Step 4")
+            # print("Step 4")
             program_serializer_data = self._create_update_program_model(program_data)
 
-            print("Step 5")
+            # print("Step 5")
             return Response(data=program_serializer_data, status=status.HTTP_200_OK)
         except Exception as exception:
             transaction.rollback(True)
@@ -83,8 +82,7 @@ class ProgramCreateUpdateAPIView(APIView):
         for workout_data in workouts_dataset:
             # print(workout_data)
             exercises_data = self._check_and_get_data(workout_data, 'exercises')
-
-            print(exercises_data)
+            # print(exercises_data)
             workout_data['exercises'] = self._create_update_exercises_with_serializer(exercises_data)
 
             if 'id' in workout_data:
@@ -96,14 +94,15 @@ class ProgramCreateUpdateAPIView(APIView):
             serializer.is_valid(raise_exception=True)
             serializer.save()
 
-            workout_serializer_ides.append(serializer.validated_data['id'])
-
+            workout_serializer_ides.append(serializer.data['id'])
         return workout_serializer_ides
 
     def _create_update_exercises_with_serializer(self, dataset):
         exercises_serializer_ids = []
-
+        # print("Step 1 in Exercises serializer")
         for data in dataset:
+            # print(data)
+
             if 'id' in data:
                 instance = ExerciseModel.objects.get(id=data['id'])
                 serializer = ExercisesModelSerializer(instance=instance, data=data)
@@ -112,7 +111,7 @@ class ProgramCreateUpdateAPIView(APIView):
 
             serializer.is_valid(raise_exception=True)
             serializer.save()
-            exercises_serializer_ids.append(serializer.validated_data['id'])
+            exercises_serializer_ids.append(serializer.data['id'])
 
         return exercises_serializer_ids
 
@@ -126,4 +125,4 @@ class ProgramCreateUpdateAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return serializer.validated_data
+        return serializer.data
