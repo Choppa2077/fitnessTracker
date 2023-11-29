@@ -1,11 +1,13 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import action
 from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAdminUser
 
 from django.db import transaction
+from django.shortcuts import get_object_or_404
 
 from .serializers import ProgramModelSerializer, WorkoutModelSerializer, ExercisesModelSerializer
 from .serializers import (
@@ -49,7 +51,7 @@ class ExercisesModelAPIReadOnlyModelViewSet(ReadOnlyModelViewSet):
 
 
 class ProgramCreateUpdateAPIView(APIView):
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
 
     @transaction.atomic
     def post(self, request):
@@ -129,7 +131,7 @@ class ProgramCreateUpdateAPIView(APIView):
 
 
 class ProgramModelAPIViewSet(ModelViewSet):
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
     queryset = ProgramModel.objects.all()
     serializer_class = ProgramModelSerializer
 
@@ -141,9 +143,33 @@ class ProgramModelAPIViewSet(ModelViewSet):
         else:
             return super().get_serializer_class()
 
+    @action(detail=True, methods=['post'], url_path='adding-workout-to-program')
+    def adding_exercises_to_workout(self, request, pk):
+        program = ProgramModel.objects.get(id=pk)
+
+        workouts_id = request.data['workouts']
+        for workout_id in workouts_id:
+            workout = get_object_or_404(WorkoutModel, id=workout_id)
+            program.workouts.add(workout)
+            program.save()
+
+        return Response(data={'message': 'All given workouts added.'}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['delete'], url_path='delete-workout-from-program')
+    def delete_exercises_from_workout(self, request, pk):
+        program = ProgramModel.objects.get(id=pk)
+
+        workouts_id = request.data['workouts']
+        for workout_id in workouts_id:
+            workout = get_object_or_404(WorkoutModel, id=workout_id)
+            program.workouts.remove(workout)
+            program.save()
+
+        return Response(data={'message': 'All given workouts removed'}, status=status.HTTP_200_OK)
+
 
 class WorkoutModelAPIViewSet(ModelViewSet):
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
     queryset = WorkoutModel.objects.all()
     serializer_class = WorkoutModelSerializer
 
@@ -155,9 +181,33 @@ class WorkoutModelAPIViewSet(ModelViewSet):
         else:
             return super().get_serializer_class()
 
+    @action(detail=True, methods=['post'], url_path='adding-exercises-to-workout')
+    def adding_exercises_to_workout(self, request, pk):
+        workout = WorkoutModel.objects.get(id=pk)
+
+        exercises_id = request.data['exercises']
+        for exercise_id in exercises_id:
+            exercise = get_object_or_404(ExerciseModel, id=exercise_id)
+            workout.exercises.add(exercise)
+            workout.save()
+
+        return Response(data={'message': 'All given exercises added.'}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['delete'], url_path='delete-exercises-from-workout')
+    def delete_exercises_from_workout(self, request, pk):
+        workout = WorkoutModel.objects.get(id=pk)
+
+        exercises_id = request.data['exercises']
+        for exercise_id in exercises_id:
+            exercise = get_object_or_404(ExerciseModel, id=exercise_id)
+            workout.exercises.remove(exercise)
+            workout.save()
+
+        return Response(data={'message': 'All given exercises removed'}, status=status.HTTP_200_OK)
+
 
 class ExercisesModelAPIViewSet(ModelViewSet):
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
     queryset = ExerciseModel.objects.all()
     serializer_class = ExercisesModelSerializer
 
@@ -168,3 +218,4 @@ class ExercisesModelAPIViewSet(ModelViewSet):
             return ExercisesModelSerializerCover
         else:
             return super().get_serializer_class()
+

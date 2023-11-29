@@ -20,20 +20,6 @@ class WorkoutModelSerializerCover(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
-class ProgramModelSerializerCover(serializers.ModelSerializer):
-    class Meta:
-        model = ProgramModel
-        fields = ['id', 'name']
-
-
-class ProgramModelSerializerDetail(serializers.ModelSerializer):
-    workouts = WorkoutModelSerializerCover(many=True)
-
-    class Meta:
-        model = ProgramModel
-        fields = ['id', 'name', 'workouts']
-
-
 class WorkoutModelSerializerDetail(serializers.ModelSerializer):
     exercises = ExercisesModelSerializerCover(many=True)
 
@@ -42,10 +28,27 @@ class WorkoutModelSerializerDetail(serializers.ModelSerializer):
         fields = ['id', 'name', 'exercises']
 
 
+class ProgramModelSerializerCover(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramModel
+        fields = ['id', 'tittle', 'description']
+
+
+class ProgramModelSerializerDetail(serializers.ModelSerializer):
+    workouts = WorkoutModelSerializerCover(many=True)
+
+    class Meta:
+        model = ProgramModel
+        fields = ['id', 'tittle', 'description', 'workouts']
+
+
 class ProgramModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProgramModel
         fields = "__all__"
+        extra_kwargs = {
+            "workouts": {'required': False}
+        }
 
     def create(self, validated_data):
         workouts = validated_data.pop('workouts', None)
@@ -73,6 +76,9 @@ class WorkoutModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkoutModel
         fields = "__all__"
+        extra_kwargs = {
+            "exercises": {'required': False}
+        }
 
     def create(self, validated_data):
         exercises = validated_data.pop('exercises', None)
