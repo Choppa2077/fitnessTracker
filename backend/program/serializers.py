@@ -41,3 +41,66 @@ class WorkoutModelSerializerDetail(serializers.ModelSerializer):
         model = WorkoutModel
         fields = ['id', 'name', 'exercises']
 
+
+class ProgramModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramModel
+        fields = "__all__"
+
+    def create(self, validated_data):
+        workouts = validated_data.pop('workouts', None)
+        program = ProgramModel.objects.create(**validated_data)
+
+        if workouts:
+            program.workouts.set(workouts)
+
+        return program
+
+    def update(self, instance, validated_data):
+        workouts = validated_data.pop('workouts', None)
+
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+
+        if workouts:
+            instance.workouts.set(workouts)
+
+        return instance
+
+
+class WorkoutModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkoutModel
+        fields = "__all__"
+
+    def create(self, validated_data):
+        exercises = validated_data.pop('exercises', None)
+        workout = WorkoutModel.objects.create(**validated_data)
+
+        if exercises:
+            workout.exercises.set(exercises)
+
+        return workout
+
+    def update(self, instance, validated_data):
+        exercises = validated_data.pop('exercises', None)
+
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+
+        if exercises:
+            instance.exercises.set(exercises)
+
+        return instance
+
+
+class ExercisesModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExerciseModel
+        fields = "__all__"
+
+
+
+

@@ -33,7 +33,7 @@ const ReadyWorkoutCard = ({item, navigateToWorkout, insideText}) => {
   };
 
   const saveWorkout = () => {
-    // Handle saving the workout here
+    // Handle saving the adminmode here
     closeModal();
   };
 

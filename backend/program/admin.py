@@ -1,5 +1,5 @@
-# from django.contrib import admin
+# from django.contrib import adminmode
 # from .models import ProgramModel
 # # Register your models here.
 #
-# admin.site.register(ProgramModel)
+# adminmode.site.register(ProgramModel)

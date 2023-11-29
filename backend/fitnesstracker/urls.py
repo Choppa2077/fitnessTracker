@@ -6,7 +6,4 @@ urlpatterns = [
 
     path('profile/', include('user.urls')),
     path('program/', include('program.urls')),
-
-    path('exercise/', include('exercise.urls')),
-    path('workouts/', include('admin.urls')),
 ]

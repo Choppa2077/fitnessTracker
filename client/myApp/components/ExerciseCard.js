@@ -34,7 +34,7 @@ const ExerciseCard = ({countOfSets, lengthOfGivenData}) => {
   };
 
   const saveWorkout = () => {
-    // Handle saving the workout here
+    // Handle saving the adminmode here
     closeModal();
   };
 
