@@ -126,3 +126,45 @@ class ProgramCreateUpdateAPIView(APIView):
         serializer.save()
 
         return serializer.data
+
+
+class ProgramModelAPIViewSet(ModelViewSet):
+    permission_classes = [IsAdminUser]
+    queryset = ProgramModel.objects.all()
+    serializer_class = ProgramModelSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return ProgramModelSerializerDetail
+        elif self.action == 'list':
+            return ProgramModelSerializerCover
+        else:
+            return super().get_serializer_class()
+
+
+class WorkoutModelAPIViewSet(ModelViewSet):
+    permission_classes = [IsAdminUser]
+    queryset = WorkoutModel.objects.all()
+    serializer_class = WorkoutModelSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return WorkoutModelSerializerDetail
+        elif self.action == 'list':
+            return WorkoutModelSerializerCover
+        else:
+            return super().get_serializer_class()
+
+
+class ExercisesModelAPIViewSet(ModelViewSet):
+    permission_classes = [IsAdminUser]
+    queryset = ExerciseModel.objects.all()
+    serializer_class = ExercisesModelSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return ExercisesModelSerializerDetail
+        elif self.action == 'list':
+            return ExercisesModelSerializerCover
+        else:
+            return super().get_serializer_class()
