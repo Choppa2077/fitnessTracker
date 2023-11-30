@@ -23,7 +23,7 @@ const DaysList = () => {
       {daysData.map((item, index) => (
         <View>
           <Days key={item} lines={lines} />
-          {item === daysData.length ? <View /> : <VerticalLine key={index} />}
+          {item === daysData.length ? <View /> : <VerticalLine key={index} left={"left-24"} />}
         </View>
       ))}
     </View>

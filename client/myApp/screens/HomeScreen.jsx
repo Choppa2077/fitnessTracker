@@ -21,6 +21,9 @@ import CustomCalendar from '../components/CustomCalendar';
 import {theme} from '../colors/backgrounds';
 import {useNavigation} from '@react-navigation/native';
 import AddButton from '../components/AddButton';
+import EditInputs from '../components/EditInputs';
+import CancelSave from '../components/CancelSave';
+import HorizontalLine from '../components/HorizontalLine';
 
 const HomeScreen = () => {
   const [myWorkoutList, setMyWorkoutList] = useState([]);
@@ -44,7 +47,7 @@ const HomeScreen = () => {
     try {
       // Make a POST request to your backend API endpoint to save workout data
       // Example using fetch:
-      const response = await fetch('http://10.48.136.82:8000/program/create/', {
+      const response = await fetch('http://10.48.136.73:8000/program/create/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +56,7 @@ const HomeScreen = () => {
         body: JSON.stringify({
           tittle,
           description,
-          workouts
+          workouts,
         }),
       });
       console.log(
@@ -82,7 +85,7 @@ const HomeScreen = () => {
     try {
       // Make a GET request to your backend API endpoint to fetch workout data
       // Example using fetch:
-      const response = await fetch('http://10.48.136.82:8000/program');
+      const response = await fetch('http://10.48.136.73:8000/program');
 
       // Check if the request was successful (you may need to adjust based on your API response format)
       if (response.ok) {
@@ -121,7 +124,7 @@ const HomeScreen = () => {
               className="font-extrabold"
               style={{color: theme.newMainColor}}>
               {/* {backendData.message} */}
-             User
+              User
             </Text>
           </Text>
           <Text className="text-white" style={{fontSize: hp(1.6)}}>
@@ -152,76 +155,42 @@ const HomeScreen = () => {
           <View
             className="p-8 rounded-lg items-center "
             style={{
-              backgroundColor: theme.background,
+              backgroundColor: theme.calendar,
               width: hp(40),
               height: hp(50),
             }}>
             <View>
               <Text
-                className="font-extrabold"
+                className="font-extrabold text-white"
                 style={{
-                  fontSize: hp(3),
-                  marginBottom: hp(1),
-                  color: theme.secondary,
+                  fontSize: hp(2.5),
+                  marginBottom: hp(5),
                 }}>
                 Create a workout routine
               </Text>
               <View>
-                <Text
-                  className="text-white"
-                  style={{fontSize: hp(2), marginBottom: hp(1)}}>
-                  Name
-                </Text>
-                <TextInput
-                  placeholder="Workout Name"
-                  value={tittle}
-                  onChangeText={text => setTittle(text)}
-                  className="rounded-full"
-                  style={{
-                    backgroundColor: 'white',
-                    width: hp(30),
-                    marginBottom: hp(3),
-                    fontSize: hp(2.5),
-                  }}
+                <EditInputs
+                  textParam={tittle}
+                  setInput={setTittle}
+                  placeholder={'Username'}
+                  paddingVertical={hp(3)}
+                  withIcon={false}
                 />
               </View>
               <View>
-                <Text
-                  className="text-white"
-                  style={{fontSize: hp(2), marginBottom: hp(1)}}>
-                  Details
-                </Text>
-                <TextInput
-                  placeholder="Description(Optional)"
-                  value={description}
-                  onChangeText={text => setDescription(text)}
-                  className=" rounded-3xl"
-                  style={{
-                    backgroundColor: 'white',
-                    width: hp(30),
-                    height: hp(10),
-                    marginBottom: hp(3),
-                    fontSize: hp(2.5),
-                  }}
+                <EditInputs
+                  textParam={description}
+                  setInput={setDescription}
+                  placeholder={'Description(Optional)'}
+                  paddingVertical={hp(3)}
+                  withIcon={false}
                 />
               </View>
             </View>
-            <View style={{width: hp(40)}} className="flex-row justify-evenly">
-              <TouchableOpacity onPress={closeModal}>
-                <Text
-                  style={{color: theme.close, fontSize: hp(2.5)}}
-                  className="font-bold">
-                  Cancel
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={saveWorkout}>
-                <Text
-                  style={{color: theme.secondary, fontSize: hp(2.5)}}
-                  className="font-bold">
-                  Save
-                </Text>
-              </TouchableOpacity>
+            <View className="items-center" style={{marginTop: hp(4)}}>
+              <HorizontalLine color={theme.line} height={3} width={hp(40)} />
             </View>
+            <CancelSave closeWorkoutModal={closeModal} />
           </View>
         </View>
       </Modal>

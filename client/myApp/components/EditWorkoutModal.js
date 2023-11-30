@@ -10,6 +10,8 @@ import {useNavigation} from '@react-navigation/native';
 import CheckBox from 'expo-checkbox';
 import HorizontalLine from './HorizontalLine';
 import VerticalLine from './VerticalLine';
+import EditInputs from './EditInputs';
+import CancelSave from './CancelSave';
 
 const EditWorkoutModal = ({isWorkoutModalVisible, closeWorkoutModal}) => {
   const navigation = useNavigation();
@@ -48,21 +50,15 @@ const EditWorkoutModal = ({isWorkoutModalVisible, closeWorkoutModal}) => {
           }}>
           <View className="flex-1 items-center">
             <Text className="text-white font-bold" style={{fontSize: hp(3)}}>
-              Edit Workout
+              Add Workout
             </Text>
-            <View className="absolute top-32 ">
-              <TextInput
-                placeholder="Workout Name"
-                placeholderTextColor="white"
-                value={workoutName}
-                onChangeText={text => setWorkoutName(text)}
-                className="rounded-full"
-                style={{
-                  backgroundColor: theme.placeholder,
-                  width: hp(33),
-                  marginBottom: hp(3),
-                  fontSize: hp(2.5),
-                }}
+            <View className="absolute top-24 ">
+              <EditInputs
+                textParam={workoutName}
+                setInput={setWorkoutName}
+                placeholder={'Workout Name'}
+                paddingVertical={hp(1.3)}
+                withIcon={false}
               />
             </View>
             <View className="absolute bottom-20 flex-row ">
@@ -94,19 +90,7 @@ const EditWorkoutModal = ({isWorkoutModalVisible, closeWorkoutModal}) => {
           </View> */}
           <HorizontalLine color={theme.border} height={2} width={'100%'} />
 
-          <View className="flex-row  justify-between mt-3">
-            <TouchableOpacity className="ml-10" onPress={closeWorkoutModal}>
-              <Text className="text-white" style={{fontSize: hp(3)}}>
-                Cancel
-              </Text>
-            </TouchableOpacity>
-            <VerticalLine color={theme.border} height={30} />
-            <TouchableOpacity className="mr-10">
-              <Text className="text-white" style={{fontSize: hp(3)}}>
-                Save
-              </Text>
-            </TouchableOpacity>
-          </View>
+        <CancelSave closeWorkoutModal={closeWorkoutModal}/>
         </View>
       </View>
     </Modal>

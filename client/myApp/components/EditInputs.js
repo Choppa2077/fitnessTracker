@@ -58,44 +58,38 @@ import {theme} from '../colors/backgrounds';
 //     </View>
 //   );
 // };
-const EditInputs = ({textParam, setInput, placeholder}) => {
+const EditInputs = ({
+  textParam,
+  setInput,
+  placeholder,
+  paddingVertical,
+  withIcon,
+}) => {
   return (
-    // <View className="absolute z-30 " style={{}}>
-    //   <TextInput
-    //     placeholder={placeholder}
-    //     value={textParam}
-    //     onChangeText={text => setInput(text)}
-    //     className=" rounded-xl  flex-1 justify-start"
-    //     style={{
-    //       backgroundColor: theme.input,
-    //       width: hp(35),
-    //       marginBottom: hp(3),
-    //       fontSize: hp(2.5),
-    //       paddingVertical: hp(2),
-    //     }}
-    //   />
-    // </View>
     <View className="z-30" style={{marginBottom: hp(3)}}>
       <TextInput
-        className=" rounded-full relative"
-        placeholderTextColor="white"
         placeholder={placeholder}
+        placeholderTextColor={'white'}
         value={textParam}
         onChangeText={text => setInput(text)}
+        className="rounded-3xl"
         style={{
-          backgroundColor: theme.input,
+          backgroundColor: theme.modalInputs,
           width: hp(35),
           fontSize: hp(2.5),
-          paddingVertical: hp(3),
-          paddingLeft: hp(2),
-          height: hp(6),
+          padding: paddingVertical,
         }}
       />
-      <Icons.MagnifyingGlassCircleIcon
-        className="absolute right-0 top-0 bottom-0"
-        size={hp(6)}
-        color={'white'}
-      />
+
+      {withIcon ? (
+        <Icons.MagnifyingGlassCircleIcon
+          className="absolute right-0 top-0 bottom-0"
+          size={hp(6)}
+          color={'white'}
+        />
+      ) : (
+        <View />
+      )}
     </View>
   );
 };
