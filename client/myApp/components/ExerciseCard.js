@@ -43,6 +43,14 @@ const ExerciseCard = ({data, index}) => {
     setModalVisible(false);
   };
 
+<<<<<<< HEAD
+  const saveWorkout = () => {
+    // Handle saving the adminmode here
+    closeModal();
+  };
+
+=======
+>>>>>>> ffa20d9c58083ee604a6df3467e05e4af241f632
   return (
     <View
       className="flex-row justify-between items-center"

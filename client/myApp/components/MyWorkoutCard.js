@@ -41,11 +41,19 @@ const MyWorkoutCard = ({
   const closeModal = () => {
     setModalVisible(false);
   };
+<<<<<<< HEAD
+
+  const saveWorkout = () => {
+    // Handle saving the adminmode here
+    onWorkoutNameChange(workoutName); // Call the callback with workoutName
+    closeModal();
+=======
   const editProgram = () => {
     setModalVisible(false);
   };
   const deleteProgram = () => {
     setModalVisible(false);
+>>>>>>> ffa20d9c58083ee604a6df3467e05e4af241f632
   };
 
   return (

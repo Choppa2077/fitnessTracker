@@ -1,25 +1,42 @@
-from django.shortcuts import render
-from .models import UserProfile, User
-from .serializers import UserProfileSerializer,UserSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, UpdateAPIView
 
-from rest_framework import generics 
+from django.db import transaction
+from .models import User
 
-# Create your views here.
+from .serializers import CreateUserSerializer, UpdateUserSerializer, ChangeUserPasswordSerializer
 
-class UserProfileCreateAPIView(generics.CreateAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
 
-class UserProfileListAPIView(generics.ListAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
+class CreateUserCreateAPIView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = CreateUserSerializer
 
-class UserProfileEditAPIView(generics.RetrieveAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
+    @transaction.atomic
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
 
-class UserGET(generics.ListAPIView):
-    serializer_class = UserSerializer
-    def get_queryset(self):
-        email = self.kwargs['email']  # Assuming you pass muscle_group in URL
-        return User.objects.filter(email=email)
+
+class UpdateUserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = UpdateUserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+    @transaction.atomic
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+
+
+class ChangePasswordRetrieveUpdateAPIView(UpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = ChangeUserPasswordSerializer
+
+    def get_object(self):
+        return self.request.user
+
+    @transaction.atomic
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
