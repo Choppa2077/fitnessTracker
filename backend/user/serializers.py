@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from .models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
-from django.db import transaction
+
+from .models import UserProfile
 
 
 class UserProfileSerializer(serializers.ModelSerializer):

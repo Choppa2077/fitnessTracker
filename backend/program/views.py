@@ -218,4 +218,3 @@ class ExercisesModelAPIViewSet(ModelViewSet):
             return ExercisesModelSerializerCover
         else:
             return super().get_serializer_class()
-

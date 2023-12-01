@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from backend.program.models import ProgramModel
 
 
 class UserProfile(models.Model):
@@ -13,5 +14,4 @@ class UserProfile(models.Model):
     height = models.IntegerField(blank=True, null=True)
     weight = models.IntegerField(blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
-
-
+    programs = models.ManyToManyField(ProgramModel)

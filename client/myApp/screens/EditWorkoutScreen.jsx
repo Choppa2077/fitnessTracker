@@ -34,7 +34,9 @@ const EditWorkoutScreen = () => {
   const [countOfWorkouts, setCountOfWorkouts] = useState([
     1, 2, 3, 4, 5, 6, 7, 8, 8, 10,
   ]);
-  const [countOfSets, setCountOfSets] = useState([1, 2, 3, 4, 5]);
+  const [countOfSets, setCountOfSets] = useState([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  ]);
   const navigateTo = () => {
     navigation.navigate('Workout');
   };
@@ -47,7 +49,7 @@ const EditWorkoutScreen = () => {
         <View
           className="flex-row items-center justify-items-start"
           style={{paddingHorizontal: hp(2)}}>
-         <GoBackButton navigation={navigation}/>
+          <GoBackButton navigation={navigation} />
           <View>
             <Text className="text-white" style={{fontSize: hp(3)}}>
               Edit Workout
@@ -96,7 +98,7 @@ const EditWorkoutScreen = () => {
               </View>
               <View>
                 <Text className=" text-gray-400">Duration</Text>
-                <Text className="text-white font-bold">20-30 min</Text>
+                <Text className="text-white font-bold">20-50 min</Text>
               </View>
             </View>
             <View className="flex-row">

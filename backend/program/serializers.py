@@ -107,6 +107,3 @@ class ExercisesModelSerializer(serializers.ModelSerializer):
         model = ExerciseModel
         fields = "__all__"
 
-
-
-

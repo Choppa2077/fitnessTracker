@@ -1,8 +1,9 @@
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User
-from django.db import transaction
-
 from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, UpdateAPIView
+
+from django.db import transaction
+from .models import User
+
 from .serializers import CreateUserSerializer, UpdateUserSerializer, ChangeUserPasswordSerializer
 
 

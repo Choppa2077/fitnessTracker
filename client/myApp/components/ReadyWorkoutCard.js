@@ -18,8 +18,9 @@ import * as Icons from 'react-native-heroicons/solid';
 import {Carousel} from 'react-native-snap-carousel';
 import {useNavigation} from '@react-navigation/native';
 import {theme} from '../colors/backgrounds';
+import BackgroundAndCenterContent from './BackgroundAndCenterContent';
 
-const ReadyWorkoutCard = ({item, navigateToWorkout, insideText}) => {
+const ReadyWorkoutCard = ({item, navigateToProgram, title, h,icon,w}) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [workoutName, setWorkoutName] = useState('');
   const [description, setDescription] = useState('');
@@ -38,32 +39,42 @@ const ReadyWorkoutCard = ({item, navigateToWorkout, insideText}) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => navigateToWorkout(item)}>
+    <TouchableWithoutFeedback onPress={() => navigateToProgram(item)}>
       <View
-        className="flex-row mt-4 rounded-l-md rounded-r-md px-2 justify-between mx-2"
+        className="flex-row mt-4 rounded-3xl px-2 justify-between mx-2"
         style={{
-          width: wp(70),
-          height: hp(20),
-          backgroundColor: theme.primary,
+          width: w,
+          height: h,
+         
         }}>
+        <BackgroundAndCenterContent
+          source={require('../images/workoutCard.jpg')}
+          width={w}
+          height={h}
+          rounded={true}
+        />
         <View className="flex-column justify-center">
           <View style={{width: hp(24)}}>
             <Text className="text-white" style={{fontSize: hp(3)}}>
+              {/* {title ? title : workoutName} */}
               {workoutName}
             </Text>
           </View>
         </View>
 
-        <View className="absolute" style={{bottom: hp(0), right: hp(0)}}>
+        {/* <View className="absolute" style={{bottom: hp(0), right: hp(0)}}>
           <Image
             style={{height: hp(8.5), width: wp(30)}}
             source={require('../images/gantels.png')}
           />
-        </View>
-
-        <TouchableOpacity onPress={showModal}>
-          <Icons.Bars3Icon size={hp(4)} color={'white'} />
-        </TouchableOpacity>
+        </View> */}
+        {icon ? (
+          <TouchableOpacity onPress={showModal}>
+            <Icons.Bars3Icon size={hp(4)} color={'black'} />
+          </TouchableOpacity>
+        ) : (
+          <View />
+        )}
 
         <Modal transparent={true} visible={isModalVisible} animationType="fade">
           <View className="flex-1  items-center justify-center">
@@ -103,7 +114,6 @@ const ReadyWorkoutCard = ({item, navigateToWorkout, insideText}) => {
                     }}
                   />
                 </View>
-
                 <View>
                   <Text
                     className="text-white"

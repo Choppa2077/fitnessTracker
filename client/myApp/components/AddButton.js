@@ -19,21 +19,23 @@ import {theme} from '../colors/backgrounds';
 import CreateWorkoutButton from '../components/CreateWorkoutButton';
 import {useNavigation} from '@react-navigation/native';
 
-const AddButton = ({navigateTo}) => {
+const AddButton = ({showModal, bottom}) => {
   return (
-    <View
-      className="flex-1 items-end "
-      //style={{height: hp(10), marginTop: hp(2)}}
-    >
-      <View
-        className="absolute"
-        style={{bottom: hp(8), paddingHorizontal: hp(2)}}>
-        <TouchableWithoutFeedback onPress={navigateTo}>
-          <Icons.PlusCircleIcon size={hp(7)} color={theme.add} />
-        </TouchableWithoutFeedback>
-      </View>
+    <View className=" items-end" style={{marginTop:hp(5), paddingHorizontal: hp(2)}}>
+      <TouchableWithoutFeedback onPress={showModal}>
+        <Icons.PlusCircleIcon size={hp(8)} color={theme.newMainColor} />
+      </TouchableWithoutFeedback>
     </View>
   );
+
+  // <View
+  //       className="flex-1 items-end justify-center"
+  //       style={{height: hp(8), marginBottom:hp(10)}}>
+  //       <TouchableWithoutFeedback
+  //         onPress={() => navigation.navigate('EditWorkout')}>
+  //         <Icons.PlusCircleIcon size={hp(7)} color={theme.secondary} />
+  //       </TouchableWithoutFeedback>
+  //     </View>
 };
 
 export default AddButton;

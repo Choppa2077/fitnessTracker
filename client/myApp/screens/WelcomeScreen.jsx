@@ -56,6 +56,7 @@ import {useNavigation} from '@react-navigation/native';
 import ButtonAndAlreadyHave from '../components/ButtonAndAlreadyHave';
 import BackgroundAndCenterContent from '../components/BackgroundAndCenterContent';
 import EditInputs from '../components/EditInputs';
+import MainButton from '../components/MainButton';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
@@ -121,12 +122,12 @@ const WelcomeScreen = () => {
           </Text>
         </View>
       )}
-
+      <MainButton route={"Register"} navigation={navigation} signUpOrLogin={'Get Started'} />
       <ButtonAndAlreadyHave
-        route={'Register'}
-        navigation={navigation}
+        // route={'Register'}
+        // navigation={navigation}
         mainColor={theme.newMainColor}
-        signUpOrLogin={'Sign Up'}
+        signUpOrLogin={'Get Started'}
         drawSignUp={drawSignUp}
         drawLogin={drawLogin}
         showInputs={showInputs}

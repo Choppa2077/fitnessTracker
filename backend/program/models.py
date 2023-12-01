@@ -19,3 +19,4 @@ class ProgramModel(models.Model):
     tittle = models.CharField(max_length=70)
     description = models.TextField()
     workouts = models.ManyToManyField(WorkoutModel)
+

@@ -5,7 +5,7 @@ import CreateWorkoutScreen from '../screens/EditWorkoutScreen';
 import WorkoutScreen from '../screens/ProgramScreen';
 import EditWorkoutScreen from '../screens/EditWorkoutScreen';
 import HistoryScreen from '../screens/HistoryScreen';
-import ExercicesScreen from '../screens/ExercicesScreen';
+import ExercisesScreen from '../screens/ExercisesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import {theme} from '../colors/backgrounds';
 import {
@@ -14,6 +14,7 @@ import {
 } from 'react-native-responsive-screen';
 // import { CubeIcon, HomeIcon } from 'react-native-heroicons/solid';
 import * as Icons from 'react-native-heroicons/solid';
+import EditExercisesScreen from '../screens/EditExercisesScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ export default function BottomTabs() {
           backgroundColor: theme.calendar,
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
-          height: hp(8),
+          height: hp(10),
         },
         tabBarActiveTintColor: theme.newMainColor,
         tabBarInactiveTintColor: 'white',
@@ -54,7 +55,7 @@ export default function BottomTabs() {
 
       <Tab.Screen
         options={{
-          tabBarLabel: 'History',
+          tabBarLabel: 'Edit exercises',
           tabBarLabelStyle: {
             position: 'absolute',
             bottom: 10,
@@ -64,28 +65,14 @@ export default function BottomTabs() {
             <Icons.CalendarIcon name="home" color={'white'} size={24} />
           ),
         }}
-        name="History"
-        component={HistoryScreen}
+        name="EditExercises"
+        component={EditExercisesScreen}
       />
 
+      
       <Tab.Screen
         options={{
-          tabBarLabel: 'Create',
-          tabBarLabelStyle: {
-            position: 'absolute',
-            bottom: 10,
-            fontSize: hp(1.3),
-          },
-          tabBarIcon: ({color, size}) => (
-            <Icons.CubeIcon name="home" color={'white'} size={24} />
-          ),
-        }}
-        name="Create"
-        component={CreateWorkoutScreen}
-      />
-      <Tab.Screen
-        options={{
-          tabBarLabel: 'Exercices',
+          tabBarLabel: 'Exercises',
           tabBarLabelStyle: {
             position: 'absolute',
             bottom: 10,
@@ -95,8 +82,8 @@ export default function BottomTabs() {
             <Icons.FolderIcon name="home" color={'white'} size={24} />
           ),
         }}
-        name="Exercices"
-        component={ExercicesScreen}
+        name="Exercises"
+        component={ExercisesScreen}
       />
       <Tab.Screen
         options={{
