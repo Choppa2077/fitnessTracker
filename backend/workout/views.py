@@ -17,3 +17,9 @@ class WorkoutViewSet(viewsets.ModelViewSet):
    queryset = WorkoutModel.objects.all()
    lookup_field = 'id'
    
+class WorkoutByProgramAPIView(generics.ListAPIView):
+    serializer_class = WorkoutSerializer
+
+    def get_queryset(self):
+        program_id = self.kwargs['program']  # Assuming you pass program ID in URL
+        return WorkoutModel.objects.filter(program_id=program_id)

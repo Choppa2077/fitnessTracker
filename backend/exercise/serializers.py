@@ -1,14 +1,16 @@
 from rest_framework import serializers
-from .models import ExerciseModel
+from .models import ExerciseModel, SystemExercises, SetModel
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExerciseModel
-        fields = [
-            'id',
-            'name',
-            'description',
-            'count_of_sets',
-            'rest_between_sets',
-            'rest_between_exercices',
-            'image_url'
-        ]
+        fields = '__all__'
+
+class SystemExerciseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SystemExercises
+        fields = '__all__'
+
+class SetSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = SetModel
+        fields = '__all__'

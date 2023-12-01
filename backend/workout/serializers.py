@@ -11,43 +11,46 @@ class ExerciseShowSerializer(serializers.ModelSerializer):
             'name',
         ]
 
-        
-
 class WorkoutSerializer(serializers.ModelSerializer):
-    exercises = ExerciseSerializer(many=True)
-
     class Meta:
         model = WorkoutModel
         fields = '__all__'
-        read_only = 'exercises'
 
-    def create(self, validated_data):
-        exercises_data = validated_data.pop('exercises')
-        exercises = []
-        workout = WorkoutModel.objects.create(**validated_data)
+# class WorkoutSerializer(serializers.ModelSerializer):
+#     exercises = ExerciseSerializer(many=True)
 
-        for i in exercises_data:
-            try:
-                e = ExerciseModel.objects.get_or_create(name=i['name'], defaults=i)[0]
-                exercises.append(e)
-            except:
-                pass
-        workout.exercises.set(exercises)
-        return workout
+#     class Meta:
+#         model = WorkoutModel
+#         fields = '__all__'
+#         read_only = 'exercises'
 
-    def update(self, instance, validated_data):
-        exercises_data = validated_data.pop('exercises')
-        exercises = []
-        workout = instance
-        for(key, value) in validated_data.items():
-            setattr(workout, key, value)
-        for i in exercises_data:
-            try:
-               e = ExerciseModel.objects.get_or_create(name=i['name'], defaults=i)[0]
-               exercises.append(e)
-            except:
-                pass
-        workout.exercises.set(exercises)
-        workout.save()
-        return workout
+#     def create(self, validated_data):
+#         exercises_data = validated_data.pop('exercises')
+#         exercises = []
+#         workout = WorkoutModel.objects.create(**validated_data)
+
+#         for i in exercises_data:
+#             try:
+#                 e = ExerciseModel.objects.get_or_create(name=i['name'], defaults=i)[0]
+#                 exercises.append(e)
+#             except:
+#                 pass
+#         workout.exercises.set(exercises)
+#         return workout
+
+#     def update(self, instance, validated_data):
+#         exercises_data = validated_data.pop('exercises')
+#         exercises = []
+#         workout = instance
+#         for(key, value) in validated_data.items():
+#             setattr(workout, key, value)
+#         for i in exercises_data:
+#             try:
+#                e = ExerciseModel.objects.get_or_create(name=i['name'], defaults=i)[0]
+#                exercises.append(e)
+#             except:
+#                 pass
+#         workout.exercises.set(exercises)
+#         workout.save()
+#         return workout
                 
