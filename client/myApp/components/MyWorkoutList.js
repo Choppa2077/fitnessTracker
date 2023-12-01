@@ -17,8 +17,7 @@ import {Carousel} from 'react-native-snap-carousel';
 import {useNavigation} from '@react-navigation/native';
 import MyWorkoutCard from './MyWorkoutCard';
 
-
-const MyWorkoutList = ({data, onWorkoutNameChange}) => {
+const MyWorkoutList = ({myWorkoutList, data, onWorkoutNameChange}) => {
   const lengthOfGivenData = data.length;
   const navigation = useNavigation();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -32,14 +31,13 @@ const MyWorkoutList = ({data, onWorkoutNameChange}) => {
   const navigateToWorkout = item => {
     lengthOfGivenData === 0
       ? navigation.navigate('EditWorkout', item)
-      : navigation.navigate('Workout', item);
+      : navigation.navigate('Program', item);
   };
 
   // Function to close the modal
   const closeModal = () => {
     setSelectedItem(null); // Reset the selected item to close the modal
   };
-
 
   // console.log(lengthOfGivenData);
   const itemsCenter = 'items-center';
@@ -54,6 +52,7 @@ const MyWorkoutList = ({data, onWorkoutNameChange}) => {
             Create your own workout routines
           </Text>
           <MyWorkoutCard
+            myWorkoutList={myWorkoutList}
             item={data}
             openModal={openModal}
             itemsCenter={itemsCenter}
@@ -73,24 +72,23 @@ const MyWorkoutList = ({data, onWorkoutNameChange}) => {
           </Text>
           <Carousel
             data={data}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => (
               <MyWorkoutCard
+                myWorkoutList={myWorkoutList[index].tittle}
                 item={item}
                 openModal={openModal}
                 itemsCenter={' '}
                 navigateToWorkout={navigateToWorkout}
                 lengthOfGivenData={lengthOfGivenData}
-               // insideText="Abs"
-               onWorkoutNameChange={onWorkoutNameChange}
+                // insideText="aAbs"
+                onWorkoutNameChange={onWorkoutNameChange}
               />
-              
             )}
             firstItem={1}
             inactiveSlideOpacity={0.7}
             sliderWidth={wp(100)}
             itemWidth={wp(70)}
             sliderStyle={{display: 'flex', alignItems: 'center'}}></Carousel>
-         
         </View>
       )}
     </View>

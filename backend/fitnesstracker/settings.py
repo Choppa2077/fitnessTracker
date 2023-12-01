@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'program',
     'workout',
     'exercise',
+
     'user',
+
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -54,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'fitnesstracker.urls'
@@ -83,9 +88,17 @@ WSGI_APPLICATION = 'fitnesstracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Use the MySQL database backend
+<<<<<<< HEAD
         'NAME': 'kot',          # Name of your MySQL database
+=======
+
+        'NAME': 'database',          # Name of your MySQL database
+>>>>>>> f83a49d61cf9a07eb7c25c485eb7415cdaeb6664
         'USER': 'root',         # Your MySQL username
         'PASSWORD': '2508',     # Your MySQL password
+        'NAME': 'fitness',          # Name of your MySQL database
+        'USER': 'root',         # Your MySQL username
+        'PASSWORD': 'm511',     # Your MySQL password
         'HOST': 'localhost',                   # MySQL host, usually 'localhost'
         'PORT': '3306', 
     }
@@ -132,3 +145,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+# settings.py
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.100.11', "10.48.136.82", "10.48.136.73", "192.168.51.49"]

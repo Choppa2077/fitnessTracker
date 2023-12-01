@@ -20,44 +20,42 @@ import ButtonAndAlreadyHave from '../components/ButtonAndAlreadyHave';
 import BackgroundAndCenterContent from '../components/BackgroundAndCenterContent';
 import GoBackButton from '../components/GoBackButton';
 import * as Icons from 'react-native-heroicons/solid';
-import Form from '../components/Form';
+
 import EditInputs from '../components/EditInputs';
+// import {err} from 'react-native-svg/lib/typescript/xml';
+import MainButton from '../components/MainButton';
 
 const RegisterScreen = () => {
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
-  const [emailAddress, setEmailAddress] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = async () => {
-    try {
-      const response = await fetch('http://192.168.79.49:8000/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-      });
-  
-      if (response.status === 201) {
-        // Registration successful
-        // You can navigate the user to the welcome screen or perform any other actions here
-
-      } else {
-        // Handle registration errors, e.g., username already exists
-      }
-    } catch (error) {
-      // Handle network errors
-    }
-  };
-  
-
+  // const handleSignUp = async () => {
+  //   try {
+  //     const response = await fetch('http://10.48.136.731:8000/signup', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         username,
+  //         password,
+  //         email,
+  //       }),
+  //     });
+  //     if (response.status === 200) {
+  //       console.log('Data is sended');
+  //       navigation.navigate('Home');
+  //     } else if (response.status === 400) {
+  //       console.log('You already register');
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <View className="flex-1 items-center ">
@@ -75,24 +73,37 @@ const RegisterScreen = () => {
           textParam={username}
           setInput={setUsername}
           placeholder={'Username'}
-        />
-        <EditInputs
-          textParam={emailAddress}
-          setInput={setEmailAddress}
-          placeholder={'Email Address'}
+          paddingVertical={hp(3)}
+          withIcon={false}
         />
         <EditInputs
           textParam={password}
           setInput={setPassword}
           placeholder={'Password'}
+          paddingVertical={hp(3)}
+          withIcon={false}
+        />
+        <EditInputs
+          textParam={email}
+          setInput={setEmail}
+          placeholder={'Email Address'}
+          paddingVertical={hp(3)}
+          withIcon={false}
         />
       </View>
+      <MainButton
+        absoluteBottom={'absolute bottom-36'}
+        route={'Home'}
+        navigation={navigation}
+        width={hp(34)}
+        rounded={'rounded-3xl'}
+        fontLarge={hp(2.5)}
+        signUpOrLogin={'Sign Up'}
+        // handleSignUp={handleSignUp}
+      />
       <ButtonAndAlreadyHave
-        route={""}
         navigation={navigation}
         mainColor={theme.newMainColor}
-        signUpOrLogin={'Sign Up'}
-        
       />
     </View>
   );
