@@ -1,7 +1,8 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
-from .views import CreateUserCreateAPIView, ChangePasswordRetrieveUpdateAPIView, UpdateUserRetrieveUpdateAPIView
+from .views import (CreateUserCreateAPIView, ChangePasswordRetrieveUpdateAPIView,
+                    UpdateUserRetrieveUpdateAPIView, AddDeleteProgramToUserAPIView)
 
 urlpatterns = [
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -10,5 +11,7 @@ urlpatterns = [
 
     path('', UpdateUserRetrieveUpdateAPIView.as_view(), name='auth-update-user-profile'),
     path('create-user/', CreateUserCreateAPIView.as_view(), name='create-user'),
-    path('reset-password/', ChangePasswordRetrieveUpdateAPIView.as_view(), name='auth-update-password')
+    path('reset-password/', ChangePasswordRetrieveUpdateAPIView.as_view(), name='auth-update-password'),
+
+    path('programs/', AddDeleteProgramToUserAPIView.as_view(), name='user-programs')
 ]

@@ -1,7 +1,20 @@
 from django.db import models
 
 
+class SetModel(models.Model):
+    reps = models.IntegerField()
+    weight = models.IntegerField()
+
+
+class SystemExercises(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    muscle_group = models.CharField(max_length=100)
+    image = models.ImageField()
+
+
 class ExerciseModel(models.Model):
+    sets = models.ManyToManyField(SetModel)
     name = models.CharField(max_length=50)
     description = models.TextField()
     count_of_sets = models.IntegerField()
