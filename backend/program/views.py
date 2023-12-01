@@ -1,10 +1,11 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
+from rest_framework.generics import ListAPIView, DestroyAPIView, RetrieveUpdateAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from django.db import transaction
 from django.shortcuts import get_object_or_404
@@ -13,8 +14,8 @@ from .serializers import ProgramModelSerializer, WorkoutModelSerializer, Exercis
 from .serializers import (
     ProgramModelSerializerCover, ProgramModelSerializerDetail,
     WorkoutModelSerializerCover, WorkoutModelSerializerDetail,
-    ExercisesModelSerializerCover, ExercisesModelSerializerDetail)
-from .models import ProgramModel, WorkoutModel, ExerciseModel
+    ExercisesModelSerializerCover, ExercisesModelSerializerDetail, SetModelSerializer, SystemExerciseSerializer)
+from .models import ProgramModel, WorkoutModel, ExerciseModel, SystemExercises, SetModel
 
 
 class ProgramModelAPIReadOnlyModelViewSet(ReadOnlyModelViewSet):
@@ -48,6 +49,11 @@ class ExercisesModelAPIReadOnlyModelViewSet(ReadOnlyModelViewSet):
             return super().get_serializer_class()
         elif self.action == 'retrieve':
             return ExercisesModelSerializerDetail
+
+
+class SetsModelAPIReadOnlyModelViewSet(ReadOnlyModelViewSet):
+    queryset = SetModel.objects.all()
+    serializer_class = SetModelSerializer
 
 
 class ProgramCreateUpdateAPIView(APIView):
@@ -218,3 +224,42 @@ class ExercisesModelAPIViewSet(ModelViewSet):
             return ExercisesModelSerializerCover
         else:
             return super().get_serializer_class()
+
+    @action(detail=True, methods=['post'], url_path='adding-set-model-to-exercises')
+    def adding_set_model_to_exercises(self, request, pk):
+        exercise = ExerciseModel.objects.get(id=pk)
+
+        sets_id = request.data['sets']
+        for set_id in sets_id:
+            set_model = get_object_or_404(SetModel, id=set_id)
+            exercise.sets.add(set_model)
+            exercise.save()
+
+        return Response(data={'message': 'All given sets added.'}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['delete'], url_path='delete-set-model-from-exercises')
+    def delete_set_model_from_exercises(self, request, pk):
+        exercise = ExerciseModel.objects.get(id=pk)
+
+        sets_id = request.data['sets']
+        for set_id in sets_id:
+            set_model = get_object_or_404(SetModel, id=set_id)
+            exercise.sets.remove(set_model)
+            exercise.save()
+
+        return Response(data={'message': 'All given sets removed'}, status=status.HTTP_200_OK)
+
+
+class SetsModelAPIViewSet(ModelViewSet):
+    # permission_classes = [IsAdminUser]
+    queryset = SetModel.objects.all()
+    serializer_class = SetModelSerializer
+
+
+class SystemExercisesByMuscleGroupAPIView(ListAPIView):
+    serializer_class = SystemExerciseSerializer
+
+    def get_queryset(self):
+        muscle_group = self.kwargs['muscle_group']
+        return SystemExercises.objects.filter(muscle_group=muscle_group)
+

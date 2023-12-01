@@ -3,8 +3,17 @@ from rest_framework.validators import UniqueValidator
 
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
+from django.apps import apps
 
 from .models import UserProfile
+
+ProgramModel = apps.get_model('program', 'ProgramModel')
+
+
+class ProgramModelSerializerCover(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramModel
+        fields = ['id', 'tittle', 'description']
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
