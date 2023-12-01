@@ -1,6 +1,4 @@
 # Byte-compiled / optimized Python files
-*.pyc
-__pycache__/
 
 # Django-specific files
 *.log
