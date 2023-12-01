@@ -47,12 +47,11 @@ const HomeScreen = () => {
     try {
       // Make a POST request to your backend API endpoint to save workout data
       // Example using fetch:
-      const response = await fetch('http://10.48.136.73:8000/program/create/', {
+      const response = await fetch('http://192.168.51.49:8000/program/create/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Include any necessary headers (e.g., authentication token)
-        },
+         },
         body: JSON.stringify({
           tittle,
           description,
@@ -85,7 +84,7 @@ const HomeScreen = () => {
     try {
       // Make a GET request to your backend API endpoint to fetch workout data
       // Example using fetch:
-      const response = await fetch('http://10.48.136.73:8000/program');
+      const response = await fetch('http://192.168.51.49:8000/program');
 
       // Check if the request was successful (you may need to adjust based on your API response format)
       if (response.ok) {
@@ -166,13 +165,13 @@ const HomeScreen = () => {
                   fontSize: hp(2.5),
                   marginBottom: hp(5),
                 }}>
-                Create a workout routine
+                Create a program
               </Text>
               <View>
                 <EditInputs
                   textParam={tittle}
                   setInput={setTittle}
-                  placeholder={'Username'}
+                  placeholder={'Program name'}
                   paddingVertical={hp(3)}
                   withIcon={false}
                 />

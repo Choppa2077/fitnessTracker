@@ -51,7 +51,7 @@ const ProgramScreen = () => {
           <DaysList />
           {/* <Modal isModalVisible={isModalVisible} /> */}
         </View>
-        <AddButton showModal={showModal} />
+        <AddButton showModal={showModal} bottom={"bottom-10"} />
         <EditWorkoutModal isWorkoutModalVisible={isModalVisible} closeWorkoutModal={closeWorkoutModal} />
       </ScrollView>
     </View>

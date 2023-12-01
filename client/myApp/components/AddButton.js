@@ -19,7 +19,7 @@ import {theme} from '../colors/backgrounds';
 import CreateWorkoutButton from '../components/CreateWorkoutButton';
 import {useNavigation} from '@react-navigation/native';
 
-const AddButton = ({showModal}) => {
+const AddButton = ({showModal, bottom}) => {
   return (
     <View className=" items-end" style={{marginTop:hp(5), paddingHorizontal: hp(2)}}>
       <TouchableWithoutFeedback onPress={showModal}>

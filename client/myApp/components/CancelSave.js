@@ -15,7 +15,7 @@ const CancelSave = ({closeWorkoutModal}) => {
           Cancel
         </Text>
       </TouchableOpacity>
-      <VerticalLine color={theme.border} height={'100%'} left={'left-0'} />
+      <VerticalLine color={theme.line} width={3} height={'100%'} left={'left-0'} />
       <TouchableOpacity className="mr-10">
         <Text className="text-white" style={{fontSize: hp(3)}}>
           Save

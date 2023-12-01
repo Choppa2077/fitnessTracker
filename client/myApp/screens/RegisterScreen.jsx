@@ -33,29 +33,29 @@ const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = async () => {
-    try {
-      const response = await fetch('http://192.168.100.11:8000/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-          email,
-        }),
-      });
-      if (response.status === 200) {
-        console.log('Data is sended');
-        navigation.navigate('Home');
-      } else if (response.status === 400) {
-        console.log('You already register');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSignUp = async () => {
+  //   try {
+  //     const response = await fetch('http://10.48.136.731:8000/signup', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         username,
+  //         password,
+  //         email,
+  //       }),
+  //     });
+  //     if (response.status === 200) {
+  //       console.log('Data is sended');
+  //       navigation.navigate('Home');
+  //     } else if (response.status === 400) {
+  //       console.log('You already register');
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <View className="flex-1 items-center ">
@@ -99,7 +99,7 @@ const RegisterScreen = () => {
         rounded={'rounded-3xl'}
         fontLarge={hp(2.5)}
         signUpOrLogin={'Sign Up'}
-        handleSignUp={handleSignUp}
+        // handleSignUp={handleSignUp}
       />
       <ButtonAndAlreadyHave
         navigation={navigation}

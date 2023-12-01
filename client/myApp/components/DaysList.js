@@ -10,7 +10,7 @@ import {v4 as uuidv4} from 'react-native-get-random-values';
 
 const DaysList = () => {
   // const unicalD = uuidv4()
-  const [daysData, setDaysData] = useState([1, 2, 3]);
+  const [daysData, setDaysData] = useState([]);
   const [lines, setLines] = useState([1, 2]);
   return (
     <View>
@@ -20,12 +20,22 @@ const DaysList = () => {
           {item === daysData.length ? <View /> : <VerticalLine />}
         </View>
       ))} */}
-      {daysData.map((item, index) => (
-        <View>
-          <Days key={item} lines={lines} />
-          {item === daysData.length ? <View /> : <VerticalLine key={index} left={"left-24"} />}
+      {daysData ? (
+        daysData.map((item, index) => (
+          <View>
+            <Days key={item} lines={lines} />
+            {item === daysData.length ? (
+              <View />
+            ) : (
+              <VerticalLine key={index} left={'left-24'} />
+            )}
+          </View>
+        ))
+      ) : (
+        <View className="items-center relative">
+          <Text className="text-white">Create a workout</Text>
         </View>
-      ))}
+      )}
     </View>
   );
 };
